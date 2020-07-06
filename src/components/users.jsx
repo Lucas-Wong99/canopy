@@ -1,11 +1,14 @@
 import React from "react";
 
-function User(props) {
+function User({ first, last, current_status }) {
   return (
     <div>
       <ul>
-        <li>{props.first}</li>
-        <li>{props.last}</li>
+        <li>
+          {first + " "}
+          {last}
+        </li>
+        <li>{current_status}</li>
       </ul>
     </div>
   );
