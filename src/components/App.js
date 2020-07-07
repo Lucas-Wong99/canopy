@@ -1,7 +1,19 @@
 import React from "react";
 import Test from "./test";
 import StatusFeed from "./statusFeed";
+import CreateStatus from "./create_status";
 import { Grommet, Grid, Box } from "grommet";
+import { googleSignin, googleSignout } from "./google_btn";
+
+const theme = {
+  global: {
+    font: {
+      family: "Roboto",
+      size: "14px",
+      height: "20px",
+    },
+  },
+};
 
 function App() {
   return (
@@ -23,7 +35,9 @@ function App() {
             direction="column"
             wrap="true"
             overflow="scroll"
-            justifyContent="between"
+            jus
+            t
+            ifyContent="between"
             align="start"
             pad={{
               top: "small",
@@ -40,23 +54,17 @@ function App() {
             overflow="scroll"
             pad="medium"
           >
+            <CreateStatus />
             <StatusFeed />
           </Box>
-          <Box gridArea="main" background="light-2"></Box>
+          <Box gridArea="main" background="light-2">
+            <button onClick={() => googleSignin()}>Google Signin</button>
+            <button onClick={() => googleSignout()}>Google Signout</button>
+          </Box>
         </Grid>
       </div>
     </Grommet>
   );
 }
-
-const theme = {
-  global: {
-    font: {
-      family: "Roboto",
-      size: "14px",
-      height: "20px",
-    },
-  },
-};
 
 export default App;
