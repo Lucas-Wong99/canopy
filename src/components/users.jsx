@@ -1,14 +1,15 @@
 import React from "react";
+import { Grommet, Grid, Box } from "grommet";
 
 function User({ first, last, current_status }) {
   return (
-    <ul>
-      <li>
+    <Box border={{ size: "small", color: "black" }} pad="xsmall" margin="small">
+      <div>
         {first + " "}
         {last}
-      </li>
-      <li>{current_status}</li>
-    </ul>
+      </div>
+      <div>{current_status}</div>
+    </Box>
   );
 }
 
