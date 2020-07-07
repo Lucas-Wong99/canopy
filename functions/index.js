@@ -1,18 +1,55 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-admin.initializeApp(functions.config().firebase);
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  response.send("Hello from Firebase!");
+admin.initializeApp();
+
+// Take the text parameter passed to this HTTP endpoint and insert it into
+// Cloud Firestore under the path /messages/:documentId/original
+exports.addMessage = functions.https.onRequest(async (req, res) => {
+  // Grab the text parameter.
+  const original = req.query.text;
+  // Push the new message into Cloud Firestore using the Firebase Admin SDK.
+  const writeResult = await admin
+    .firestore()
+    .collection("messages")
+    .add({ original: original });
+  // Send back a message that we've succesfully written the message
+  res.json({ result: `Message with ID: ${writeResult.id} added.` });
 });
 
-exports.addStatus;
-// exports.getUsers = functions.https.onCall((request, response) => {
-// return admin.firestore().collection("Users");
-// });
+exports.addStatus = functions.https.onCall((data, context) => {
+  if (!(typeof text === "string")) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Type must be string"
+    );
+  }
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      "failed-precondition",
+      "User must be logged in in order have a status"
+    );
+  }
+  const user = context.auth.token.name || null;
+  const userStatus = data.status;
+  return admin
+    .firestore()
+    .collection("Status")
+    .set({
+      user_name: user,
+      status: userStatus,
+      date_created: admin.firestore.FieldValue.serverTimestamp(),
+      claps: 0,
+    })
+    .then((res) => {
+      console.log("New status created");
+      return res;
+    })
+    .catch((err) => {
+      console.log("Error! Status was not created");
+      return err;
+    });
+});
 
 // exports.statusChanges = functions.firestore
 //   .document("Status/{statusId}")
@@ -40,3 +77,10 @@ exports.addStatus;
 //     };
 //     return admin.messaging().sendToTopic("user_status_updates", payload);
 //   });
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//   response.send("Hello from Firebase!");
+// });
