@@ -22,7 +22,7 @@ function StatusFeed() {
         setStatusFeed(statusData);
       });
   }, []);
-  console.log(statusFeed);
+
   const statusArr = statusFeed.map((status) => {
     return (
       <Status
