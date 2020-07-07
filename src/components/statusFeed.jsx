@@ -16,7 +16,7 @@ function StatusFeed() {
             id: doc.id,
             status: doc.data().status,
             date_created: doc.data().date_created,
-            user_name: doc.data().user_name
+            user_name: doc.data().user_name,
           })
         );
         setStatusFeed(statusData);
