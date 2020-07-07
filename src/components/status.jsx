@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Grommet, Grid, Box } from "grommet";
 
 function Status({ date_created, user_name, status }) {
@@ -13,7 +14,7 @@ function Status({ date_created, user_name, status }) {
           <h4>{user_name}</h4>
         </div>
         <div>{status}</div>
-        {new Date(date_created.seconds * 1000).toLocaleDateString("en-US")}
+        {moment(date_created.toDate()).fromNow()}
       </Box>
     </article>
   );
