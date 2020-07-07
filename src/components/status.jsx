@@ -1,33 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import React from "react";
 
-function Status(props) {
-  const [status, setStatus] = useState([]);
-  // const { userId } = props;
-
-  useEffect(() => {
-    return (
-      db
-        .collection("Status")
-        .orderBy("date_created")
-        // .limitToFirst(1)
-        .onSnapshot((snapshot) => {
-          let statusData = [];
-          snapshot.forEach((doc) =>
-            statusData.push({
-              id: doc.id,
-              status: doc.data().status,
-              date_created: doc.data().date_created,
-              first_name: doc.data().user
-            })
-          );
-          setStatus(statusData);
-        })
-    );
-  }, []);
-
-  console.log(status);
-  return <p>{status}</p>;
+function Status({ date_created, user_name, status }) {
+  return (
+    <article>
+      <div>
+        <h4>{user_name}</h4>
+      </div>
+      <div>{status}</div>
+      {new Date(date_created.seconds * 1000).toLocaleDateString("en-US")}
+    </article>
+  );
 }
 
 export default Status;

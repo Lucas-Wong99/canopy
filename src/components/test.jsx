@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import User from "./users";
-// import Status from "./status";
 
 function Test() {
   const [users, setUsers] = useState([]);
@@ -36,15 +35,10 @@ function Test() {
     );
   });
 
-  // const statusArr = status.map((user) => {
-  //   return <Status key={Math.random()} userId={user.id} />;
-  // });
-
   return (
     <div className="Test">
       <h1>Hello, Users!</h1>
       {usersArr}
-      {/* {statusArr} */}
     </div>
   );
 }
