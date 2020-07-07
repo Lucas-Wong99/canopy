@@ -36,7 +36,7 @@ function StatusFeed() {
   return (
     <div>
       <h4>Status</h4>
-      {statusArr}
+      {statusArr.reverse()}
     </div>
   );
 }

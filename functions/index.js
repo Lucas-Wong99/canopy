@@ -18,24 +18,24 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
 });
 
 exports.addStatus = functions.https.onCall((data, context) => {
-  if (!(typeof text === "string")) {
-    throw new functions.https.HttpsError(
-      "invalid-argument",
-      "Type must be string"
-    );
-  }
-  if (!context.auth) {
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "User must be logged in in order have a status"
-    );
-  }
   const user = context.auth.token.name || null;
   const userStatus = data.status;
+  // if (!(typeof userStatus === "string")) {
+  //   throw new functions.https.HttpsError(
+  //     "invalid-argument",
+  //     "Type must be string"
+  //   );
+  // }
+  // if (!context.auth) {
+  //   throw new functions.https.HttpsError(
+  //     "failed-precondition",
+  //     "User must be logged in in order have a status"
+  //   );
+  // }
   return admin
     .firestore()
     .collection("Status")
-    .set({
+    .add({
       user_name: user,
       status: userStatus,
       date_created: admin.firestore.FieldValue.serverTimestamp(),
@@ -77,10 +77,3 @@ exports.addStatus = functions.https.onCall((data, context) => {
 //     };
 //     return admin.messaging().sendToTopic("user_status_updates", payload);
 //   });
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   response.send("Hello from Firebase!");
-// });
