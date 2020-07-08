@@ -6,11 +6,11 @@ import { Container } from "@material-ui/core";
 
 function App() {
   return (
-    <Container maxWidth="false">
-      <div className="App">
+    <div height="90vh">
+      <Container maxWidth="false" maxHeight="100%">
         <Dashboard />
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 
