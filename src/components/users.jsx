@@ -1,5 +1,5 @@
 import React from "react";
-import { Grommet, Grid, Box } from "grommet";
+import { Box } from "grommet";
 
 function User({ first, last, current_status }) {
   return (

@@ -6,10 +6,10 @@ function CreateStatus() {
   const addStatus = (status) => {
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
-      status,
+      status
     })
       .then((res) => {
-        console.log("USERNAME!!!!", res.data.user_name);
+        console.log("USERNAME!!!!", res.user_name);
       })
       .catch((err) => {
         // console.log(err);
@@ -25,10 +25,10 @@ function CreateStatus() {
       >
         <div>
           <button onClick={() => addStatus("A little tired need coffee")}>
-            coffee break
+            Coffee Break
           </button>
-          <button onClick={() => addStatus("A little tired need coffee")}>
-            coffee break
+          <button onClick={() => addStatus("About to start a Pomodoro timer")}>
+            Pomodoro Timer
           </button>
         </div>
       </Box>

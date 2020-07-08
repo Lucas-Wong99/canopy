@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import User from "./users";
 
-function Test() {
+function Avatar_Display() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -35,12 +35,7 @@ function Test() {
     );
   });
 
-  return (
-    <div className="Test">
-      <h1>Hello, Users!</h1>
-      {usersArr}
-    </div>
-  );
+  return <div className="AvatarDisplay">{usersArr}</div>;
 }
 
-export default Test;
+export default Avatar_Display;

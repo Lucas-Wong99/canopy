@@ -15,9 +15,6 @@ export function googleSignin() {
       console.log("auth", auth);
     })
     .catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-
       console.log(error.code);
       console.log(error.message);
     });

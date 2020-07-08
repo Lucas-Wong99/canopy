@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Grommet, Grid, Box } from "grommet";
+import { Box } from "grommet";
 
 function Status({ date_created, user_name, status }) {
   return (
