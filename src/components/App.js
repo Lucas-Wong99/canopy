@@ -1,26 +1,16 @@
 import React from "react";
 import Dashboard from "./dashboard/dashboard";
 // import { auth } from "../firebase";
-import { Grommet } from "grommet";
-import Box from "@material-ui/core/Box";
-
-// const theme = {
-//   global: {
-//     font: {
-//       family: "Roboto",
-//       size: "14px",
-//       height: "20px"
-//     }
-//   }
-// };
+// import { Grommet } from "grommet";
+import { Container, Grid } from "@material-ui/core";
 
 function App() {
   return (
-    <Grommet>
+    <Grid container>
       <div className="App">
         <Dashboard />
       </div>
-    </Grommet>
+    </Grid>
   );
 }
 
