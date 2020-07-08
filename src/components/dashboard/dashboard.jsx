@@ -2,15 +2,16 @@ import React from "react";
 import StatusFeed from "../statusFeed";
 import CreateStatus from "../createStatus";
 import AvatarDisplay from "../avatarDisplay";
-import DataVis from "./dataVis";
+import DailyData from "./dailyData";
+import CustomizedProgressBars from "./waterData";
 import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import googleSignin from "../google_btn";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     padding: "10px",
-    height: "49vw",
   },
   paper: {
     padding: theme.spacing(2),
@@ -22,28 +23,40 @@ const useStyles = makeStyles((theme) => ({
   },
   dataVis: {
     height: "290px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  waterVis: {
+    height: "400 px",
   },
   avatarDisplay: {
-    height: "773px",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 }));
 
 function Dashboard() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
+    <div>
+      <Grid container spacing={2} className={classes.root}>
         <Grid item xs={12}>
           <Paper elevation={5} className={classes.paper}>
             Hello, Friend! Welcome to Canopy
-            <button>googleSignin</button>
+            <button onClick={() => googleSignin()}>Google Signin</button>
           </Paper>
         </Grid>
 
         <Grid item xs={7}>
           <Paper className={classes.paper}>
-            <Box className={classes.avatarDisplay}>
+            <Box className={classes.avatarDisplay} border={1}>
               <AvatarDisplay />
+            </Box>
+            <Box>
+              <CreateStatus />
             </Box>
           </Paper>
         </Grid>
@@ -51,16 +64,15 @@ function Dashboard() {
         <Grid item xs={5}>
           <Box border={1}>
             <Paper className={classes.paper}>
-              <Box>
-                <CreateStatus />
-              </Box>
-
-              <Box className={classes.status} height="50%" overflow="auto">
+              <Box className={classes.status} overflow="auto">
                 <StatusFeed />
               </Box>
 
-              <Box className={classes.dataVis}>
-                <DataVis />
+              <Box className={classes.dataVis} border={1}>
+                <DailyData />
+              </Box>
+              <Box className={classes.waterVis} border={1}>
+                <CustomizedProgressBars />
               </Box>
             </Paper>
           </Box>

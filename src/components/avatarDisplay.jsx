@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import User from "./users";
+import { Grid } from "@material-ui/core";
 
 function Avatar_Display() {
   const [users, setUsers] = useState([]);
@@ -35,7 +36,11 @@ function Avatar_Display() {
     );
   });
 
-  return <div className="AvatarDisplay">{usersArr}</div>;
+  return (
+    <Grid container direction="row" className="AvatarDisplay">
+      {usersArr}
+    </Grid>
+  );
 }
 
 export default Avatar_Display;

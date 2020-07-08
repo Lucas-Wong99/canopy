@@ -3,7 +3,7 @@ import firebase from "firebase";
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
-export function googleSignin() {
+function googleSignin() {
   auth
     .signInWithPopup(provider)
     .then(function (result) {
@@ -33,3 +33,5 @@ export function googleSignout() {
       }
     );
 }
+
+export default googleSignin;
