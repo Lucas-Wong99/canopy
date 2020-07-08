@@ -3,6 +3,15 @@ const admin = require("firebase-admin");
 
 admin.initializeApp();
 
+exports.newUser = functions.auth.user().onCreate((user) => {
+  console.log(user);
+  return admin.firestore().collection("Users").doc(user.uid).set({
+    name: user.displayName,
+    photoURl: user.photoURL,
+    current_status: "Chillin"
+  });
+});
+
 exports.addStatus = functions.https.onCall((data, context) => {
   const user = context.auth.token.name || null;
   const userStatus = data.status;
@@ -30,8 +39,16 @@ exports.addStatus = functions.https.onCall((data, context) => {
 });
 
 exports.updateUserStatus = functions.firestore
-  .document("Status")
-  .onCreate((snap, context) => {});
+  .document("Status/{statusId}")
+  .onCreate((snap, context) => {
+    console.log(snap.data());
+    const data = snap.data().status;
+    // const user = context.auth.token.name;
+
+    return admin.firestore().collection("Users/{HhtnPYnJjRYKgc20GIvE}").update({
+      current_status: data
+    });
+  });
 
 //POTENCIAL FUNCTION TO CALL WHEN AN UPDATE TO STATUS AND CAN ALSO SEND CLOUD MESSAGE TO USERS
 // exports.updateStatus = functions.firestore
