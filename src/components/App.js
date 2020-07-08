@@ -2,15 +2,15 @@ import React from "react";
 import Dashboard from "./dashboard/dashboard";
 // import { auth } from "../firebase";
 // import { Grommet } from "grommet";
-import { Container, Grid } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 function App() {
   return (
-    <Grid container>
+    <Container maxWidth="false">
       <div className="App">
         <Dashboard />
       </div>
-    </Grid>
+    </Container>
   );
 }
 
