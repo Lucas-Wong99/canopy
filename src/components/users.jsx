@@ -1,13 +1,11 @@
 import React from "react";
 import { Box } from "grommet";
 
-function User({ first, last, current_status }) {
+function User({ name, photoURL, current_status }) {
   return (
     <Box border={{ size: "small", color: "black" }} pad="xsmall" margin="small">
-      <div>
-        {first + " "}
-        {last}
-      </div>
+      <div>{name}</div>
+      <img src={photoURL} />
       <div>{current_status}</div>
     </Box>
   );

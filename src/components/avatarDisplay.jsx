@@ -8,14 +8,14 @@ function Avatar_Display() {
   useEffect(() => {
     return db
       .collection("Users")
-      .orderBy("first_name")
+      .orderBy("name")
       .onSnapshot((snapshot) => {
         const userData = [];
         snapshot.forEach((doc) =>
           userData.push({
             id: doc.id,
-            first_name: doc.data().first_name,
-            last_name: doc.data().last_name,
+            name: doc.data().name,
+            photoURL: doc.data().photoURL,
             current_status: doc.data().current_status
           })
         );
@@ -28,8 +28,8 @@ function Avatar_Display() {
       <User
         key={user.id}
         id={user.id}
-        first={user.first_name}
-        last={user.last_name}
+        name={user.name}
+        photoURL={user.photoURL}
         current_status={user.current_status}
       />
     );

@@ -7,7 +7,7 @@ exports.newUser = functions.auth.user().onCreate((user) => {
   console.log(user);
   return admin.firestore().collection("Users").doc(user.uid).set({
     name: user.displayName,
-    photoURl: user.photoURL,
+    photoURL: user.photoURL,
     current_status: "Chillin"
   });
 });
@@ -41,11 +41,11 @@ exports.addStatus = functions.https.onCall((data, context) => {
 exports.updateUserStatus = functions.firestore
   .document("Status/{statusId}")
   .onCreate((snap, context) => {
-    console.log(snap.data());
     const data = snap.data().status;
-    // const user = context.auth.token.name;
+    const user = context.auth;
+    console.log("user", user);
 
-    return admin.firestore().collection("Users/{HhtnPYnJjRYKgc20GIvE}").update({
+    return admin.firestore().collection(`Users/${user}`).update({
       current_status: data
     });
   });
