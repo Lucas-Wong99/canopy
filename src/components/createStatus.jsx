@@ -9,7 +9,7 @@ function CreateStatus() {
       status
     })
       .then((res) => {
-        console.log("USERNAME!!!!", res.user_name);
+        console.log("USERNAME!!!!", res);
       })
       .catch((err) => {
         // console.log(err);

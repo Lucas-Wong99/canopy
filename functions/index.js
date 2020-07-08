@@ -14,41 +14,29 @@ exports.newUser = functions.auth.user().onCreate((user) => {
 
 exports.addStatus = functions.https.onCall((data, context) => {
   const user = context.auth.token.name || null;
+  const userId = context.auth.uid || null;
   const userStatus = data.status;
-  return admin
-    .firestore()
-    .collection("Status")
-    .add({
-      user_name: user,
-      status: userStatus,
-      date_created: admin.firestore.FieldValue.serverTimestamp(),
-      claps: 0
-    })
-    .then((res) => {
-      console.log(res);
+  const newStatus = admin.firestore().collection("Status").add({
+    user_name: user,
+    status: userStatus,
+    date_created: admin.firestore.FieldValue.serverTimestamp(),
+    claps: 0
+  });
+  const updateUser = admin.firestore().collection("Users").doc(userId).update({
+    current_status: userStatus
+  });
+  const all = Promise.all([newStatus, updateUser]);
+  return all
+    .then(() => {
       return {
-        user_name: user
+        text: "hello"
       };
     })
     .catch((err) => {
-      console.log("Error! Status was not created");
-      return {
-        message: err.message
-      };
+      console.log("ERRROROR", err);
+      return err;
     });
 });
-
-exports.updateUserStatus = functions.firestore
-  .document("Status/{statusId}")
-  .onCreate((snap, context) => {
-    const data = snap.data().status;
-    const user = context.auth;
-    console.log("user", user);
-
-    return admin.firestore().collection(`Users/${user}`).update({
-      current_status: data
-    });
-  });
 
 //POTENCIAL FUNCTION TO CALL WHEN AN UPDATE TO STATUS AND CAN ALSO SEND CLOUD MESSAGE TO USERS
 // exports.updateStatus = functions.firestore
