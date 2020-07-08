@@ -1,48 +1,72 @@
 import React from "react";
-import { Grid, Box } from "grommet";
 import StatusFeed from "../statusFeed";
-import { googleSignin } from "../google_btn";
 import CreateStatus from "../createStatus";
 import AvatarDisplay from "../avatarDisplay";
+import DataVis from "./dataVis";
+import { Grid, Paper, Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    padding: "10px",
+    height: "49vw",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  status: {
+    height: "400px",
+  },
+  dataVis: {
+    height: "290px",
+  },
+  avatarDisplay: {
+    height: "773px",
+  },
+}));
 
 function Dashboard() {
+  const classes = useStyles();
   return (
-    <Grid
-      rows={["150px", "fill"]}
-      columns={["fill"]}
-      gap="small"
-      areas={[
-        { name: "header", start: [0, 0], end: [1, 0] },
-        { name: "nav", start: [0, 1], end: [0, 1] },
-        { name: "main", start: [1, 1], end: [1, 1] }
-      ]}
-    >
-      <Box
-        gridArea="header"
-        background="black"
-        direction="column"
-        overflow="scroll"
-        justifyContent="between"
-        align="start"
-        pad={{
-          top: "small",
-          bottom: "small",
-          left: "medium",
-          right: "medium"
-        }}
-      >
-        <h1>Hello, Users!</h1>
-        <h1>Welcome To Canopy</h1>
-        <button onClick={() => googleSignin()}>Google Signin</button>
-      </Box>
-      <Box gridArea="nav" background="light-5" overflow="scroll" pad="medium">
-        <AvatarDisplay />
-      </Box>
-      <Box gridArea="main" background="light-2">
-        <CreateStatus />
-        <StatusFeed />
-      </Box>
-    </Grid>
+    <div className={classes.root}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Paper elevation={5} className={classes.paper}>
+            Hello, Friend! Welcome to Canopy
+            <button>googleSignin</button>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={7}>
+          <Paper className={classes.paper}>
+            <Box className={classes.avatarDisplay}>
+              <AvatarDisplay />
+            </Box>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={5}>
+          <Box border={1}>
+            <Paper className={classes.paper}>
+              <Box>
+                <CreateStatus />
+              </Box>
+
+              <Box className={classes.status} height="50%" overflow="auto">
+                <StatusFeed />
+              </Box>
+
+              <Box className={classes.dataVis}>
+                <DataVis />
+              </Box>
+            </Paper>
+          </Box>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 

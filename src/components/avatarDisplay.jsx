@@ -16,7 +16,7 @@ function Avatar_Display() {
             id: doc.id,
             name: doc.data().name,
             photoURL: doc.data().photoURL,
-            current_status: doc.data().current_status
+            current_status: doc.data().current_status,
           })
         );
         setUsers(userData);

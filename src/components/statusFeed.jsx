@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Status from "./status";
+import { Grid, Paper, Box } from "@material-ui/core";
 
 function StatusFeed() {
   const [statusFeed, setStatusFeed] = useState([]);
