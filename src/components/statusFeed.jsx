@@ -17,7 +17,8 @@ function StatusFeed() {
             id: doc.id,
             status: doc.data().status,
             date_created: doc.data().date_created,
-            user_name: doc.data().user_name
+            user_name: doc.data().user_name,
+            claps: doc.data().claps
           })
         );
         setStatusFeed(statusData);
@@ -28,9 +29,11 @@ function StatusFeed() {
     return (
       <Status
         key={status.id}
+        id={status.id}
         status={status.status}
         date_created={status.date_created}
         user_name={status.user_name}
+        claps={status.claps}
       />
     );
   });

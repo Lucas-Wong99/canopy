@@ -38,6 +38,25 @@ exports.addStatus = functions.https.onCall((data, context) => {
     });
 });
 
+exports.incrementClaps = functions.https.onCall((data, context) => {
+  console.log("data", data);
+  const status = admin.firestore().collection("Status").doc(data.id);
+
+  return status
+    .update({
+      claps: admin.firestore.FieldValue.increment(1)
+    })
+    .then(() => {
+      return {
+        text: "hello"
+      };
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      return err;
+    });
+});
+
 //POTENCIAL FUNCTION TO CALL WHEN AN UPDATE TO STATUS AND CAN ALSO SEND CLOUD MESSAGE TO USERS
 // exports.updateStatus = functions.firestore
 //   .document("Users/{UsersId}")

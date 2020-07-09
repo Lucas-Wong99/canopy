@@ -8,7 +8,7 @@ function Pomodoro() {
   const addStatus = (status) => {
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
-      status,
+      status
     })
       .then((res) => {
         console.log("USERNAME!!!!", res);
@@ -86,7 +86,7 @@ function Pomodoro() {
           className="btn"
           onClick={() => {
             addStatus(
-              `Is taking a ${900} minute coffee break. You should come!`
+              `Is taking a ${format(900)} minute coffee break. You should come!`
             );
             reset(900);
           }}
