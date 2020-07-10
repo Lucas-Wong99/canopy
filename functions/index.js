@@ -4,7 +4,6 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 
 exports.newUser = functions.auth.user().onCreate((user) => {
-  console.log(user);
   return admin.firestore().collection("Users").doc(user.uid).set({
     name: user.displayName,
     photoURL: user.photoURL,
@@ -33,13 +32,11 @@ exports.addStatus = functions.https.onCall((data, context) => {
       };
     })
     .catch((err) => {
-      console.log("ERRROROR", err);
       return err;
     });
 });
 
 exports.incrementClaps = functions.https.onCall((data, context) => {
-  console.log("data", data);
   const status = admin.firestore().collection("Status").doc(data.id);
 
   return status
@@ -65,18 +62,20 @@ exports.getUserId = functions.https.onCall((data, context) => {
 });
 
 //POTENCIAL FUNCTION TO CALL WHEN AN UPDATE TO STATUS AND CAN ALSO SEND CLOUD MESSAGE TO USERS
-// exports.updateStatus = functions.firestore
-//   .document("Status/{StatusId}")
-//   .onCreate((change) => {
-//     const after = change.after.data();
-// const payload = {
-//   data: {
-//     user_name: after.user_name
-//     status: after.status
-//   }
-// };
-// return admin.messaging().sendToTopic("user_status_updates", payload);
-// });
+exports.updateStatus = functions.firestore
+  .document("Status/{StatusId}")
+  .onCreate((snap, context) => {
+    console.log("SNAP", snap);
+    console.log("CONTEXT", context);
+    const data = snap.data();
+    const payload = {
+      data: {
+        user_name: data.user_name,
+        status: data.status
+      }
+    };
+    return admin.messaging().sendToTopic("user_status_updates", payload);
+  });
 
 // How does authentication relate to DB users?
 // onCreate (status) --> Update User Current Status (which drives avatar status indicator color) --> Send cloud messages
