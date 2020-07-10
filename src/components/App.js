@@ -25,9 +25,9 @@ function App() {
       console.log(message)
     );
 
-    messaging.onMessage(function (payload) {
-      console.log("Payload", payload);
-    });
+    // messaging.onMessage(function (payload) {
+    //   console.log("Payload", payload);
+    // });
   }, []);
 
   return (

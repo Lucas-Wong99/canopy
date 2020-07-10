@@ -13,33 +13,33 @@ const useStyles = makeStyles((theme) => ({
   root: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     padding: "10px",
-    height: "100vh",
+    height: "100vh"
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   status: {
     height: "400px",
     display: "flex",
-    overflow: "auto",
+    overflow: "auto"
   },
   dataVis: {
     height: "290px",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   waterVis: {
-    height: "400 px",
+    height: "400 px"
   },
   avatarDisplay: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-  },
+    alignItems: "center"
+  }
 }));
 
 function Dashboard() {
@@ -54,7 +54,7 @@ function Dashboard() {
           </Paper>
         </Grid>
 
-        <Grid item xs={7} className={classes.avatarDisplay}>
+        <Grid item className={classes.avatarDisplay}>
           <Paper className={classes.paper}>
             <AvatarDisplay />
 
@@ -66,9 +66,9 @@ function Dashboard() {
           </Paper>
         </Grid>
 
-        <Grid container xs={5} className={classes.status}>
+        <Grid container className={classes.status}>
           <Paper className={classes.paper}>
-            <Grid item>
+            <Grid item xs={5}>
               <StatusFeed />
             </Grid>
             <Grid item className={classes.dataVis}>

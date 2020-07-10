@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import "./pomodoro.css";
 import { functions } from "../../firebase";
 
@@ -24,7 +24,9 @@ function Pomodoro() {
 
   useEffect(() => {
     let interval = null;
-
+    if (!play) {
+      return;
+    }
     if (play) {
       interval = setInterval(() => {
         setTime((time) => time - 1);
@@ -32,8 +34,8 @@ function Pomodoro() {
     } else if (!play && time !== 0) {
       clearInterval(interval);
     }
-    if (time === 0) {
-      reset(0);
+    if (!time >= 1) {
+      setPlay(false);
       addStatus("Finshed");
     }
 
@@ -70,7 +72,7 @@ function Pomodoro() {
           className="btn"
           onClick={() => {
             addStatus(`is starting a about to start a deep work session`);
-            reset(1500);
+            reset(10);
           }}
         >
           Deep Work
@@ -90,7 +92,7 @@ function Pomodoro() {
           className="btn"
           onClick={() => {
             addStatus(`Is taking a coffee break. You should come!`);
-            reset(900);
+            reset(10);
           }}
         >
           Coffee

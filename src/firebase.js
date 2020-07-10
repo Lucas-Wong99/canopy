@@ -16,6 +16,21 @@ const functions = firebaseApp.functions();
 const auth = firebaseApp.auth();
 const messaging = firebaseApp.messaging();
 
+messaging.onMessage(function (payload) {
+  const notification = new Notification(payload.notification.title, {
+    icon: "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
+    body: payload.notification.body
+  });
+  notification.onClick = function () {
+    window.open("http://localhost:3000");
+  };
+
+  console.log("onMessage: ", payload);
+  console.log(notification);
+  //return notification
+});
+
+//???
 messaging.usePublicVapidKey(
   "BIv5b2jf7Xq2PT7nCpAyNBssko1Ey97z2W4kJJxSphL4PBd3bJg3D5X8sRO7hjzDfbV4kLlPbXBOratX72niN_M"
 );

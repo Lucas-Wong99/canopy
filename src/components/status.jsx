@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Box, Grid } from "grommet";
+import { Grid } from "grommet";
 import { functions } from "../firebase";
 import FlareIcon from "@material-ui/icons/Flare";
 import IconButton from "@material-ui/core/IconButton";

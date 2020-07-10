@@ -8,7 +8,7 @@ exports.newUser = functions.auth.user().onCreate((user) => {
   return admin.firestore().collection("Users").doc(user.uid).set({
     name: user.displayName,
     photoURL: user.photoURL,
-    current_status: "Chillin",
+    current_status: "Chillin"
   });
 });
 
@@ -20,16 +20,16 @@ exports.addStatus = functions.https.onCall((data, context) => {
     user_name: user,
     status: userStatus,
     date_created: admin.firestore.FieldValue.serverTimestamp(),
-    claps: 0,
+    claps: 0
   });
   const updateUser = admin.firestore().collection("Users").doc(userId).update({
-    current_status: userStatus,
+    current_status: userStatus
   });
   const all = Promise.all([newStatus, updateUser]);
   return all
     .then(() => {
       return {
-        text: "hello",
+        text: "hello"
       };
     })
     .catch((err) => {
@@ -44,11 +44,11 @@ exports.incrementClaps = functions.https.onCall((data, context) => {
 
   return status
     .update({
-      claps: admin.firestore.FieldValue.increment(1),
+      claps: admin.firestore.FieldValue.increment(1)
     })
     .then(() => {
       return {
-        text: "hello",
+        text: "hello"
       };
     })
     .catch((err) => {
@@ -60,19 +60,18 @@ exports.incrementClaps = functions.https.onCall((data, context) => {
 exports.getUserId = functions.https.onCall((data, context) => {
   console.log("USER ID", context.auth.token.name);
   return {
-    userId: context.auth.token.name,
+    userId: context.auth.token.name
   };
 });
 
 //POTENCIAL FUNCTION TO CALL WHEN AN UPDATE TO STATUS AND CAN ALSO SEND CLOUD MESSAGE TO USERS
 // exports.updateStatus = functions.firestore
-//   .document("Users/{UsersId}")
-//   .onUpdate((change) => {
+//   .document("Status/{StatusId}")
+//   .onCreate((change) => {
 //     const after = change.after.data();
 // const payload = {
 //   data: {
-//     firstName: after.firstName,
-//     lastName: after.lastName,
+//     user_name: after.user_name
 //     status: after.status
 //   }
 // };

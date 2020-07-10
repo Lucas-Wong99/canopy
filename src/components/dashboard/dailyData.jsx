@@ -12,23 +12,23 @@ const weekly = {
       label: "Rainfall",
       backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
       hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-      data: [0, 0, 0],
-    },
-  ],
+      data: [0, 0, 0]
+    }
+  ]
 };
 
 const useStyles = makeStyles((theme) => ({
   daily: {
     display: "flex",
-    height: "100px",
-  },
+    height: "100px"
+  }
 }));
 
 function DataVis() {
   const classes = useStyles();
   const [user, setUser] = useState("");
-  // const [work, setWork] = useState([]);
-  // const [coffee, setCoffee] = useState([]);
+  const [work, setWork] = useState(0);
+  const [coffee, setCoffee] = useState(0);
   const [social, setSocial] = useState(0);
 
   const daily = {
@@ -38,9 +38,9 @@ function DataVis() {
         label: "Rainfall",
         backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
         hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-        data: [social, 0, 0],
-      },
-    ],
+        data: [social, work, coffee]
+      }
+    ]
   };
 
   const accessId = () => {
@@ -54,7 +54,10 @@ function DataVis() {
         console.log(err);
       });
   };
-  accessId();
+
+  useEffect(() => {
+    accessId();
+  }, []);
 
   useEffect(() => {
     return db
@@ -62,6 +65,8 @@ function DataVis() {
       .where("user_name", "==", user)
       .onSnapshot((snapshot) => {
         const socialArr = [];
+        const coffeeArr = [];
+        const workArr = [];
         snapshot.forEach((doc) => {
           const now = new Date();
           const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
@@ -71,8 +76,23 @@ function DataVis() {
           ) {
             socialArr.push(doc.data());
           }
+          if (
+            doc.data().date_created.seconds > lastMidnight &&
+            doc.data().status === "Is taking a coffee break. You should come!"
+          ) {
+            coffeeArr.push(doc.data());
+          }
+          if (
+            doc.data().date_created.seconds > lastMidnight &&
+            doc.data().status ===
+              "is starting a about to start a deep work session"
+          ) {
+            workArr.push(doc.data());
+          }
         });
         setSocial(socialArr.length);
+        setWork(workArr.length);
+        setCoffee(coffeeArr.length);
       });
   }, [user]);
 
@@ -86,12 +106,12 @@ function DataVis() {
           title: {
             display: true,
             text: "Breakdown of your day",
-            fontSize: 10,
+            fontSize: 10
           },
           legend: {
             display: false,
-            position: "right",
-          },
+            position: "right"
+          }
         }}
       />
       <Pie
@@ -102,12 +122,12 @@ function DataVis() {
           title: {
             display: true,
             text: "Breakdown of your day",
-            fontSize: 10,
+            fontSize: 10
           },
           legend: {
             display: false,
-            position: "right",
-          },
+            position: "right"
+          }
         }}
       />
     </Grid>
