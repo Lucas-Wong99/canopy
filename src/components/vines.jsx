@@ -1,0 +1,255 @@
+import React, {useRef, useEffect, useState} from 'react';
+
+
+function Vines() {
+
+  const [state, setState] = useState({
+    lattice: [
+      [{x:55, y:55}, {x:55, y:250}],
+      [{x:105, y:55}, {x:105, y:255}],
+      [{x:155, y:55}, {x:155, y:255}],
+      [{x:205, y:55}, {x:205, y:255}],
+      [{x:255, y:55}, {x:255, y:255}],
+      [{x:55, y:55}, {x:255, y:55}],
+      [{x:55, y:105}, {x:255, y:105}],
+      [{x:55, y:155}, {x:255, y:155}],
+      [{x:55, y:205}, {x:255, y:205}],
+      [{x:55, y:255}, {x:255, y:255}]	
+    ],
+    branches: [
+      {
+      points:[{x:55, y:255}, {x:55, y:255}, {x:55, y:255}, {x:55, y:255}], 
+      angle:0,
+      distanceToLattice:1000
+      }
+    ],
+    button: 0,
+    interations: 1000
+  })
+
+
+  const canvasEl = useRef(null);
+
+
+  function drawVineWithLattice(context, lattice, x, y, interations, sort, prune) {
+	
+    // Set stroke colour
+    context.lineWidth = 0.85;
+    context.strokeStyle = `rgb(0, 50, 0)`;
+  
+    // Create initial branch
+    let branches = state.branches
+    let internalInterations = interations
+
+    //[
+    //  {
+    //  points:[{x:x, y:y}, {x:x, y:y}, {x:x, y:y}, {x:x, y:y}], 
+    //  angle:0,
+    //  distanceToLattice:1000
+    //  }
+    //];
+    
+    // Start drawing splines at t=0
+    let t = 0;
+    
+    // Drawing interval
+    //let interval = setInterval(function() {
+    
+    const animation = function() {
+      // Draw branches
+      branches.forEach(branch => {
+         // Draw spline segment
+         const ax = (-branch.points[0].x + 3*branch.points[1].x - 3*branch.points[2].x + branch.points[3].x) / 6;
+         const ay = (-branch.points[0].y + 3*branch.points[1].y - 3*branch.points[2].y + branch.points[3].y) / 6;
+         const bx = (branch.points[0].x - 2*branch.points[1].x + branch.points[2].x) / 2;
+         const by = (branch.points[0].y - 2*branch.points[1].y + branch.points[2].y) / 2;
+         const cx = (-branch.points[0].x + branch.points[2].x) / 2;
+         const cy = (-branch.points[0].y + branch.points[2].y) / 2;
+         const dx = (branch.points[0].x + 4*branch.points[1].x + branch.points[2].x) / 6;
+         const dy = (branch.points[0].y + 4*branch.points[1].y + branch.points[2].y) / 6;
+         context.beginPath();
+         context.moveTo(
+           ax*Math.pow(t, 3) + bx*Math.pow(t, 2) + cx*t + dx, 
+           ay*Math.pow(t, 3) + by*Math.pow(t, 2) + cy*t + dy
+         );
+         context.lineTo(
+           ax*Math.pow(t+0.1, 3) + bx*Math.pow(t+0.1, 2) + cx*(t+0.1) + dx, 
+           ay*Math.pow(t+0.1, 3) + by*Math.pow(t+0.1, 2) + cy*(t+0.1) + dy
+         );
+         context.stroke();
+         context.closePath();
+      });
+
+      
+      // Advance t
+      t += 0.1;
+      
+      // When finished drawing splines, create a new set of branches
+      if (t >= 1) {		
+        
+        // Create array to store next iteration of branchces
+        const new_branches = [];
+        
+        // Iterate over each branch
+        branches.forEach(branch => {
+          for (let k = 0; k < 2; k++) {
+            
+            // Generate random deviation from previous angle
+            var angle = branch.angle - (Math.random() * 180 - 90);					
+            
+            // Determine closest lattice point
+            var distanceToLattice = 100000
+            for (var l in lattice) {
+              var result = distancePointToLine(branch.points[3], lattice[l]);
+              if (result < distanceToLattice) distanceToLattice = result;
+            }
+            
+            // Generate random length
+            var length = Math.random() * 15 + 4;
+            
+            // Calculate new point
+            var x2 = branch.points[3].x + Math.sin(Math.PI * angle / 180) * length;
+            var y2 = branch.points[3].y - Math.cos(Math.PI * angle / 180) * length;
+            
+            // Add to new branch array 
+            new_branches.push({
+              points:[
+                branch.points[1],
+                branch.points[2],
+                branch.points[3],
+                {x:x2, y:y2}
+              ],
+              angle:angle,
+              distanceToLattice:distanceToLattice
+            });
+          }
+        });
+        
+        // Sort branches by distance to lattice
+        new_branches.sort(function(a, b) {
+          return a.distanceToLattice - b.distanceToLattice;
+        });
+  
+        // If over 10 branches, prune the branches furthest from the lattice
+        if (prune) {
+          if (sort) {
+            while (new_branches.length > 20) new_branches.splice(Math.floor(Math.random() * (new_branches.length - 15) + 15), 1);
+          } else {
+            while (new_branches.length > 20) {
+              new_branches.splice(Math.floor(Math.random() * (new_branches.length - 15) + 15), 1);
+            }	//Math.random() * (max - min) + min;
+          }
+        }
+        
+        // Replace old branch array with new
+        branches = new_branches;
+        
+        // Restart drawing splines at t=0
+        t = 0;
+      }
+      
+      // Count interations
+      // setState(prev => ({...prev, interations: prev.interations -= 1}))
+      interations--;
+      //if (interations < 0) clearInterval(interval);
+      if (interations > 0) requestAnimationFrame(animation)  
+    //}, 16.67);
+    
+    // Return interval
+    //return interval;
+    } 
+    animation()
+  }
+  
+  function distancePointToLine(point, line) {
+    
+    // Length of line segment
+    const L = Math.sqrt(Math.pow(line[1].x - line[0].x, 2) + Math.pow(line[1].y - line[0].y, 2));
+    
+    // Calculate position of projection along line segment
+    const r = ((point.x - line[0].x) * (line[1].x - line[0].x) + (point.y - line[0].y) * (line[1].y - line[0].y)) / Math.pow(L, 2);
+  
+    // Calculate distance of point to projection
+    const s = ((line[0].y - point.y) * (line[1].x - line[0].x) - (line[0].x - point.x) * (line[1].y - line[0].y)) / Math.pow(L, 2);
+      
+    // Calculate perpendicular projection of point on line
+    if (r >= 0 && r <= 1) {
+      return Math.abs(s) * L;
+    } else {
+      return Math.min(
+        Math.sqrt(Math.pow(point.x - line[0].x, 2) + Math.pow(point.y - line[0].y, 2)),
+        Math.sqrt(Math.pow(point.x - line[1].x, 2) + Math.pow(point.y - line[1].y, 2))
+      );
+    }
+  }
+
+  let interval1;
+  let interval2;
+
+  function drawVines() {
+			
+    // Lattice now comes from state
+    // Get canvas context
+      const canvas = canvasEl.current;
+      const context = canvas.getContext("2d");	
+      
+      
+      // Clear canvas
+      //context.clearRect(0, 0, canvas.width, canvas.height);					
+    
+      // Draw lattice
+      // context.lineWidth = 0.5;
+      // context.strokeStyle = "rgb(213, 213, 213)";
+      
+      // state.lattice.forEach(lattice => {
+      //   context.beginPath();
+      //   context.moveTo(lattice[0].x, lattice[0].y);
+      //   context.lineTo(lattice[1].x, lattice[1].y);
+      //   context.stroke();
+      //   context.closePath();          
+      // });
+      
+      // Draw vines
+      interval1 = drawVineWithLattice(context, state.lattice, 55, 255, state.interations, true, true);
+      interval2 = drawVineWithLattice(context, state.lattice, 255, 255, state.interations, true, true);
+    }
+
+
+    const drawLattice = function () {
+      const canvas = canvasEl.current;
+      const context = canvas.getContext("2d");	
+      
+      // Clear canvas
+      //context.clearRect(0, 0, canvas.width, canvas.height);					
+    
+      // Draw lattice
+      context.lineWidth = 0.5;
+      context.strokeStyle = "rgb(213, 213, 213)";
+      
+      state.lattice.forEach(lattice => {
+        context.beginPath();
+        context.moveTo(lattice[0].x, lattice[0].y);
+        context.lineTo(lattice[1].x, lattice[1].y);
+        context.stroke();
+        context.closePath();
+      });
+    }
+
+  useEffect(() => {
+    drawLattice();
+  }, [])
+
+
+  useEffect(() => {
+    drawVines();
+  }, [state.interations])
+
+  return (
+    <div>
+    <canvas ref={canvasEl} height="400" width="400"/>
+  <button onClick={() => setState(prev => ({...prev, button: prev.button + 1, interations: prev.interations + 1 }))}> Button</button>
+    </div>
+  );
+}
+
+export default Vines;
