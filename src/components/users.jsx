@@ -5,10 +5,12 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 let status_color = "black";
 
 function User({ name, photoURL, current_status }) {
-  if (current_status === "About to start a Pomodoro timer") {
+  if (current_status === "`is starting a about to start a deep work session`") {
     status_color = "pink";
-  } else if (current_status === "A little tired need coffee") {
+  } else if (current_status === "needs a social break!") {
     status_color = "green";
+  } else if (current_status === "Is taking a coffee break. You should come!") {
+    status_color = "blue";
   } else {
     status_color = "orange";
   }
@@ -26,32 +28,32 @@ function User({ name, photoURL, current_status }) {
         borderRadius: "50%",
         animation: "$ripple 1.2s infinite ease-in-out",
         border: "1px solid currentColor",
-        content: '""',
-      },
+        content: '""'
+      }
     },
     "@keyframes ripple": {
       "0%": {
         transform: "scale(.8)",
-        opacity: 1,
+        opacity: 1
       },
       "100%": {
         transform: "scale(2.4)",
-        opacity: 0,
-      },
-    },
+        opacity: 0
+      }
+    }
   }))(Badge);
 
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
       "& > *": {
-        margin: theme.spacing(1),
-      },
+        margin: theme.spacing(1)
+      }
     },
     large: {
       width: theme.spacing(15),
-      height: theme.spacing(15),
-    },
+      height: theme.spacing(15)
+    }
   }));
 
   const classes = useStyles();
@@ -62,13 +64,12 @@ function User({ name, photoURL, current_status }) {
         overlap="circle"
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right",
+          horizontal: "right"
         }}
         badgeContent=" "
       >
         <Avatar className={classes.large} alt={name} src={photoURL} />
       </StyledBadge>
-      {/* <h1>{current_status}</h1> */}
     </Grid>
   );
 }

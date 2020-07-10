@@ -32,8 +32,14 @@ function Pomodoro() {
     } else if (!play && time !== 0) {
       clearInterval(interval);
     }
+    if (time === 0) {
+      reset(0);
+      addStatus("Finshed");
+    }
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [play, time]);
 
   function toggle() {
@@ -63,9 +69,7 @@ function Pomodoro() {
         <button
           className="btn"
           onClick={() => {
-            addStatus(
-              `is starting a Deep Work session for ${format(1500)} minutes`
-            );
+            addStatus(`is starting a about to start a deep work session`);
             reset(1500);
           }}
         >
@@ -76,7 +80,7 @@ function Pomodoro() {
           className="btn"
           onClick={() => {
             addStatus("needs a social break!");
-            reset(300);
+            reset(10);
           }}
         >
           Social
@@ -85,9 +89,7 @@ function Pomodoro() {
         <button
           className="btn"
           onClick={() => {
-            addStatus(
-              `Is taking a ${format(900)} minute coffee break. You should come!`
-            );
+            addStatus(`Is taking a coffee break. You should come!`);
             reset(900);
           }}
         >

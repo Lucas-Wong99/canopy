@@ -11,12 +11,6 @@ function Status({ id, date_created, user_name, status, claps }) {
     incrementClaps({
       id: statusId
     });
-    // .then((data) => {
-    //   console.log(data);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   };
 
   return (
@@ -31,8 +25,8 @@ function Status({ id, date_created, user_name, status, claps }) {
         </div>
         <div>{status}</div>
         {moment(date_created.toDate()).fromNow()}
-        <IconButton>
-          <FlareIcon onClick={() => increaseClaps(id)} />
+        <IconButton onClick={() => increaseClaps(id)}>
+          <FlareIcon />
         </IconButton>
           {claps}
       </Box>
