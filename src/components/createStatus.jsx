@@ -3,16 +3,14 @@ import { Box } from "grommet";
 import { functions } from "../firebase";
 
 function CreateStatus() {
-  const addStatus = (status) => {
-    const createStatus = functions.httpsCallable("addStatus");
-    createStatus({
-      status
-    })
+  const send = () => {
+    const sendMessage = functions.httpsCallable("sendMessage");
+    sendMessage()
       .then((res) => {
         console.log("USERNAME!!!!", res);
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
   };
 
@@ -24,12 +22,7 @@ function CreateStatus() {
         margin="small"
       >
         <div>
-          <button onClick={() => addStatus("A little tired need coffee")}>
-            Coffee Break
-          </button>
-          <button onClick={() => addStatus("About to start a Pomodoro timer")}>
-            Pomodoro Timer
-          </button>
+          <button onClick={() => send()}>send a message</button>
         </div>
       </Box>
     </article>

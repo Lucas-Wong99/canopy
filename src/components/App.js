@@ -3,19 +3,24 @@ import Dashboard from "./dashboard/dashboard";
 // import { auth } from "../firebase";
 // import { Grommet } from "grommet";
 import { Container } from "@material-ui/core";
-import { messaging } from "../firebase";
+import { messaging, functions } from "../firebase";
 
 function App() {
-  // const [deviceToken, setDeviceToken] = useState({ deviceToken: null });
-
+  const sendToken = (token) => {
+    const sendTokenToFirestore = functions.httpsCallable(
+      "sendTokenToFirestore"
+    );
+    sendTokenToFirestore({
+      token
+    });
+  };
   useEffect(() => {
     messaging
       .requestPermission()
       .then(async function () {
         const token = await messaging.getToken();
         console.log("TOKEN", token);
-        // sendTokenToServer(token);
-        // setDeviceToken({ deviceToken: token });
+        sendToken(token);
       })
 
       .catch(function (err) {
