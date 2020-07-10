@@ -5,7 +5,7 @@ import AvatarDisplay from "../avatarDisplay";
 import DailyData from "./dailyData";
 import Toolbox from "../toolbox/toolbox";
 import CustomizedProgressBars from "./waterData";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import googleSignin from "../google_btn";
 
@@ -15,30 +15,26 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     height: "100vh",
   },
+  brandBar: {
+    height: "75px",
+  },
   paper: {
-    padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    height: "100%",
   },
   status: {
-    height: "400px",
-    display: "flex",
     overflow: "auto",
+    height: "50%",
   },
   dataVis: {
-    height: "290px",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    height: "90%",
   },
   waterVis: {
-    height: "400 px",
+    height: "100px",
   },
   avatarDisplay: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+    height: "90%",
   },
 }));
 
@@ -47,15 +43,15 @@ function Dashboard() {
   return (
     <div>
       <Grid container spacing={2} className={classes.root}>
-        <Grid item xs={12}>
-          <Paper elevation={5} className={classes.paper}>
+        <Grid item xs={12} className={classes.brandBar}>
+          <Paper className={classes.paper} elevation={5}>
             Hello, Friend! Welcome to Canopy
             <button onClick={() => googleSignin()}>Google Signin</button>
           </Paper>
         </Grid>
 
-        <Grid item xs={7} className={classes.avatarDisplay}>
-          <Paper className={classes.paper}>
+        <Grid item xs={6} className={classes.avatarDisplay}>
+          <Paper className={classes.paper} elevation={5}>
             <AvatarDisplay />
 
             <CreateStatus />
@@ -66,15 +62,15 @@ function Dashboard() {
           </Paper>
         </Grid>
 
-        <Grid container xs={5} className={classes.status}>
-          <Paper className={classes.paper}>
-            <Grid item>
+        <Grid item xs={6} className={classes.dataVis}>
+          <Paper className={classes.paper} elevation={5}>
+            <Box className={classes.status}>
               <StatusFeed />
-            </Grid>
-            <Grid item className={classes.dataVis}>
+            </Box>
+            <Box className={classes.waterVis}>
               <DailyData />
               <CustomizedProgressBars />
-            </Grid>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
