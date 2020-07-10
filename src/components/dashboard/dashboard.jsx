@@ -2,9 +2,10 @@ import React from "react";
 import StatusFeed from "../statusFeed";
 import CreateStatus from "../createStatus";
 import AvatarDisplay from "../avatarDisplay";
-import DailyData from "./dailyData";
+import DailyDataVis from "./dailyData";
+import WeeklyDataVis from "./weeklyData";
 import Toolbox from "../toolbox/toolbox";
-import Vines from "../vines"
+import Vines from "../vines";
 import CustomizedProgressBars from "./waterData";
 import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,18 +25,21 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     height: "100%",
   },
+  avatarDisplay: {
+    height: "90%",
+  },
+  leftBar: {
+    height: "90%",
+  },
   status: {
     overflow: "auto",
     height: "50%",
   },
   dataVis: {
-    height: "90%",
+    display: "flex",
   },
   waterVis: {
     height: "100px",
-  },
-  avatarDisplay: {
-    height: "90%",
   },
 }));
 
@@ -63,13 +67,16 @@ function Dashboard() {
           </Paper>
         </Grid>
 
-        <Grid item xs={6} className={classes.dataVis}>
+        <Grid item xs={6} className={classes.leftBar}>
           <Paper className={classes.paper} elevation={5}>
             <Box className={classes.status}>
               <StatusFeed />
             </Box>
+            <Box className={classes.dataVis}>
+              <DailyDataVis />
+              <WeeklyDataVis />
+            </Box>
             <Box className={classes.waterVis}>
-              <DailyData />
               <CustomizedProgressBars />
             </Box>
           </Paper>

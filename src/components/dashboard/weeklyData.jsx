@@ -5,18 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { db, functions } from "../../firebase";
 // import { Timestamp } from "@google-cloud/firestore";
 
-const weekly = {
-  labels: ["Self-care", "Heads down work", "Collaboration"],
-  datasets: [
-    {
-      label: "Rainfall",
-      backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
-      hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-      data: [0, 0, 0],
-    },
-  ],
-};
-
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
@@ -26,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DailyDataVis() {
+function WeeklyDataVis() {
   const classes = useStyles();
   const [user, setUser] = useState("");
   const [work, setWork] = useState(0);
   const [coffee, setCoffee] = useState(0);
   const [social, setSocial] = useState(0);
 
-  const daily = {
+  const weekly = {
     labels: ["Self-care", "Heads down work", "Collaboration"],
     datasets: [
       {
@@ -79,7 +67,7 @@ function DailyDataVis() {
             socialArr.push(doc.data());
           }
           if (
-            doc.data().date_created.seconds > lastMidnight &&
+            doc.data().date_created.seconds < lastMidnight &&
             doc.data().status === "Is taking a coffee break. You should come!"
           ) {
             coffeeArr.push(doc.data());
@@ -101,13 +89,13 @@ function DailyDataVis() {
   return (
     <Grid item className={classes.daily}>
       <Pie
-        data={daily}
+        data={weekly}
         // height={50}
         // width={50}
         options={{
           title: {
             display: true,
-            text: "Breakdown of your day",
+            text: "Breakdown of your week",
             fontSize: 10,
           },
           legend: {
@@ -120,4 +108,4 @@ function DailyDataVis() {
   );
 }
 
-export default DailyDataVis;
+export default WeeklyDataVis;
