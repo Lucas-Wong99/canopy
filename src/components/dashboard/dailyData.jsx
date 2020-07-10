@@ -12,16 +12,18 @@ const weekly = {
       label: "Rainfall",
       backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
       hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-      data: [0, 0, 0]
-    }
-  ]
+      data: [0, 0, 0],
+    },
+  ],
 };
 
 const useStyles = makeStyles((theme) => ({
-  daily: {
+  dataVis: {
     display: "flex",
-    height: "100px"
-  }
+  },
+  daily: {
+    // display: "flex",
+  },
 }));
 
 function DataVis() {
@@ -38,9 +40,9 @@ function DataVis() {
         label: "Rainfall",
         backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
         hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-        data: [social, work, coffee]
-      }
-    ]
+        data: [social, work, coffee],
+      },
+    ],
   };
 
   const accessId = () => {
@@ -97,39 +99,41 @@ function DataVis() {
   }, [user]);
 
   return (
-    <Grid item className={classes.daily}>
-      <Pie
-        data={daily}
-        height={50}
-        width={50}
-        options={{
-          title: {
-            display: true,
-            text: "Breakdown of your day",
-            fontSize: 10
-          },
-          legend: {
-            display: false,
-            position: "right"
-          }
-        }}
-      />
-      <Pie
-        data={weekly}
-        height={50}
-        width={50}
-        options={{
-          title: {
-            display: true,
-            text: "Breakdown of your day",
-            fontSize: 10
-          },
-          legend: {
-            display: false,
-            position: "right"
-          }
-        }}
-      />
+    <Grid container className={classes.dataVis}>
+      <Grid item className={classes.daily}>
+        <Pie
+          data={daily}
+          // height={50}
+          // width={50}
+          options={{
+            title: {
+              display: true,
+              text: "Breakdown of your day",
+              fontSize: 10,
+            },
+            legend: {
+              display: false,
+              position: "right",
+            },
+          }}
+        />
+        <Pie
+          data={weekly}
+          // height={50}
+          // width={50}
+          options={{
+            title: {
+              display: true,
+              text: "Breakdown of your day",
+              fontSize: 10,
+            },
+            legend: {
+              display: false,
+              position: "right",
+            },
+          }}
+        />
+      </Grid>
     </Grid>
   );
 }
