@@ -57,7 +57,7 @@ function Dashboard() {
 
             <CreateStatus />
 
-            {/* Vines will go here */}
+            <Vines />
 
             <Toolbox />
           </Paper>
