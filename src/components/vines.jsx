@@ -23,8 +23,7 @@ function Vines() {
       distanceToLattice:1000
       }
     ],
-    button: 0,
-    interations: 1000
+    interations: 10
   })
 
 
@@ -35,28 +34,21 @@ function Vines() {
 	
     // Set stroke colour
     context.lineWidth = 0.85;
-    context.strokeStyle = `rgb(0, 50, 0)`;
+    context.strokeStyle = `rgb(0, ${Math.random() * (150 - 50) + 50}, 0)`;
   
-    // Create initial branch
+    // Grab current branch state
     let branches = state.branches
-    let internalInterations = interations
-
-    //[
-    //  {
-    //  points:[{x:x, y:y}, {x:x, y:y}, {x:x, y:y}, {x:x, y:y}], 
-    //  angle:0,
-    //  distanceToLattice:1000
-    //  }
-    //];
     
-    // Start drawing splines at t=0
+    
+    // T value controls the splines, (the curve shape for the vines)
     let t = 0;
     
-    // Drawing interval
-    //let interval = setInterval(function() {
+    
+    //The core animation loop that will get called by requestAnimationFrame
     
     const animation = function() {
-      // Draw branches
+      
+      // Drawing branches loop
       branches.forEach(branch => {
          // Draw spline segment
          const ax = (-branch.points[0].x + 3*branch.points[1].x - 3*branch.points[2].x + branch.points[3].x) / 6;
@@ -143,24 +135,22 @@ function Vines() {
         
         // Replace old branch array with new
         branches = new_branches;
-        
+        setState(prev => ({...prev, branches: new_branches}))
         // Restart drawing splines at t=0
         t = 0;
       }
       
-      // Count interations
-      // setState(prev => ({...prev, interations: prev.interations -= 1}))
+      // Interations from state control how far into the animation to start 
+      //-- this will be the source of controlling from our Database
+      
       interations--;
-      //if (interations < 0) clearInterval(interval);
       if (interations > 0) requestAnimationFrame(animation)  
-    //}, 16.67);
-    
-    // Return interval
-    //return interval;
+
     } 
     animation()
   }
   
+  // Function to help sort and prune based on distance from lattice
   function distancePointToLine(point, line) {
     
     // Length of line segment
@@ -184,7 +174,8 @@ function Vines() {
   }
 
   let interval1;
-  let interval2;
+  //let interval2;  <- if we want multiple sources we will have to initiate multiple branches in state, and pass them in as
+    // args to the drawVineWithLattice function
 
   function drawVines() {
 			
@@ -192,36 +183,17 @@ function Vines() {
     // Get canvas context
       const canvas = canvasEl.current;
       const context = canvas.getContext("2d");	
-      
-      
-      // Clear canvas
-      //context.clearRect(0, 0, canvas.width, canvas.height);					
-    
-      // Draw lattice
-      // context.lineWidth = 0.5;
-      // context.strokeStyle = "rgb(213, 213, 213)";
-      
-      // state.lattice.forEach(lattice => {
-      //   context.beginPath();
-      //   context.moveTo(lattice[0].x, lattice[0].y);
-      //   context.lineTo(lattice[1].x, lattice[1].y);
-      //   context.stroke();
-      //   context.closePath();          
-      // });
-      
+			    
       // Draw vines
       interval1 = drawVineWithLattice(context, state.lattice, 55, 255, state.interations, true, true);
-      interval2 = drawVineWithLattice(context, state.lattice, 255, 255, state.interations, true, true);
+      //interval2 = drawVineWithLattice(context, state.lattice, 255, 255, state.interations, true, true);  
     }
 
 
     const drawLattice = function () {
       const canvas = canvasEl.current;
       const context = canvas.getContext("2d");	
-      
-      // Clear canvas
-      //context.clearRect(0, 0, canvas.width, canvas.height);					
-    
+      					
       // Draw lattice
       context.lineWidth = 0.5;
       context.strokeStyle = "rgb(213, 213, 213)";
@@ -247,7 +219,7 @@ function Vines() {
   return (
     <div>
     <canvas ref={canvasEl} height="400" width="400"/>
-  <button onClick={() => setState(prev => ({...prev, button: prev.button + 1, interations: prev.interations + 1 }))}> Button</button>
+  <button onClick={() => setState(prev => ({...prev, interations: prev.interations + 1 }))}> Button</button>
     </div>
   );
 }
