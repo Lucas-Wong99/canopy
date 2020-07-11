@@ -90,13 +90,14 @@ exports.sendTokenToFirestore = functions.https.onCall((data, context) => {
 
 //Sending a message to a specific user by accessing their id from "data" and message fromdata
 exports.sendMessage = functions.https.onCall((data, context) => {
+  const token = data.token;
+
   var message = {
     notification: {
-      title: "We are so smart!",
+      title: "Nudge!!",
       body: "from:" + context.auth.token.name
     },
-    token:
-      "fY0ZkChxRirCy6V5Uu6_2k:APA91bH9tHLrG5HC7BU9uVYbjGgLDzlDCi_gHcYRNHrDegHlSB2c42CcDaVEP8acKLMJcC3fRnOvLqVsua2NOUFdAq2ohx4AHnBsmwYA2P0tFD7VZqbHISWqby2dUa4IyNpbjMKavOVl"
+    token: token
   };
 
   return admin

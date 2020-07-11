@@ -7,11 +7,11 @@ import { db, functions } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   dataVis: {
-    display: "flex",
+    display: "flex"
   },
   daily: {
     // display: "flex",
-  },
+  }
 }));
 
 function WeeklyDataVis() {
@@ -28,9 +28,9 @@ function WeeklyDataVis() {
         label: "Rainfall",
         backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
         hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-        data: [social, work, coffee],
-      },
-    ],
+        data: [social, work, coffee]
+      }
+    ]
   };
 
   const accessId = () => {
@@ -45,9 +45,9 @@ function WeeklyDataVis() {
       });
   };
 
-  useEffect(() => {
-    accessId();
-  }, []);
+  // useEffect(() => {
+  //   accessId();
+  // }, []);
 
   useEffect(() => {
     return db
@@ -96,12 +96,12 @@ function WeeklyDataVis() {
           title: {
             display: true,
             text: "Breakdown of your week",
-            fontSize: 10,
+            fontSize: 10
           },
           legend: {
             display: false,
-            position: "right",
-          },
+            position: "right"
+          }
         }}
       />
     </Grid>

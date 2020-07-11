@@ -1,10 +1,11 @@
 import React from "react";
 import { Badge, Avatar, Grid } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { functions } from "../firebase";
 
 let status_color = "black";
 
-function User({ name, photoURL, current_status }) {
+function User({ name, photoURL, current_status, token }) {
   if (current_status === "`is starting a about to start a deep work session`") {
     status_color = "pink";
   } else if (current_status === "needs a social break!") {
@@ -58,6 +59,19 @@ function User({ name, photoURL, current_status }) {
 
   const classes = useStyles();
 
+  const send = (token) => {
+    const sendMessage = functions.httpsCallable("sendMessage");
+    sendMessage({
+      token
+    })
+      .then((res) => {
+        console.log("USERNAME!!!!", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Grid item className={classes.root}>
       <StyledBadge
@@ -70,6 +84,7 @@ function User({ name, photoURL, current_status }) {
       >
         <Avatar className={classes.large} alt={name} src={photoURL} />
       </StyledBadge>
+      <button onClick={() => send(token)}>Nudge</button>
     </Grid>
   );
 }

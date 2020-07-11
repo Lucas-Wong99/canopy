@@ -18,6 +18,7 @@ function Avatar_Display() {
             name: doc.data().name,
             photoURL: doc.data().photoURL,
             current_status: doc.data().current_status,
+            token: doc.data().deviceToken
           })
         );
         setUsers(userData);
@@ -32,6 +33,7 @@ function Avatar_Display() {
         name={user.name}
         photoURL={user.photoURL}
         current_status={user.current_status}
+        token={user.token}
       />
     );
   });
