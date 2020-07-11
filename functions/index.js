@@ -91,7 +91,7 @@ exports.sendTokenToFirestore = functions.https.onCall((data, context) => {
 //Sending a message to a specific user by accessing their id from "data" and message fromdata
 exports.sendMessage = functions.https.onCall((data, context) => {
   const token = data.token;
-
+  console.log(token);
   var message = {
     notification: {
       title: "Nudge!!",

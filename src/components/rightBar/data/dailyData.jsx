@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { db, functions } from "../../../firebase";
+import { db } from "../../../firebase";
 // import { Timestamp } from "@google-cloud/firestore";
 
 const weekly = {
@@ -26,9 +26,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function DailyDataVis() {
+function DailyDataVis({ user }) {
   const classes = useStyles();
-  const [user, setUser] = useState("");
   const [work, setWork] = useState(0);
   const [coffee, setCoffee] = useState(0);
   const [social, setSocial] = useState(0);
@@ -45,21 +44,22 @@ function DailyDataVis() {
     ]
   };
 
-  const accessId = () => {
-    const getUserId = functions.httpsCallable("getUserId");
-    getUserId()
-      .then((data) => {
-        setUser(data.data.userId);
-        // return data.data.userId;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // ============= refactoring up to Right Bar for now
+  // const accessId = () => {
+  //   const getUserId = functions.httpsCallable("getUserId");
+  //   getUserId()
+  //     .then((data) => {
+  //       setUser(data.data.userId);
+  //       // return data.data.userId;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  // useEffect(() => {
-  //   accessId();
-  // }, []);
+  // // useEffect(() => {
+  // //   accessId();
+  // // }, []);
 
   useEffect(() => {
     return db
