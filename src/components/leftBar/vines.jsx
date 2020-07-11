@@ -292,8 +292,13 @@ function Vines({ statusCount }) {
     drawLattice();
   }, []);
 
+
   useEffect(() => {
     setState((prev) => ({ ...prev, interations: statusCount }));
+  }, [statusCount])
+
+
+  useEffect(() => {
     drawVines();
   }, [state.interations]);
 
