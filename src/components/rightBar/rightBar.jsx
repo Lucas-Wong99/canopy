@@ -10,27 +10,27 @@ import { db, functions } from "../../firebase";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   rightPaper: {
-    height: "48%"
+    height: "48%",
   },
   rightBar: {
     height: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   status: {
     overflow: "auto",
-    height: "100%"
-  }
+    height: "100%",
+  },
 }));
 
 export default function RightBar({ setStatusCount }) {
@@ -155,7 +155,7 @@ export default function RightBar({ setStatusCount }) {
         </Box>
         <Box className={classes.waterVis}>
           <h1> Daily Water intake</h1>
-          <CustomizedProgressBars />
+          <CustomizedProgressBars username={user} />
         </Box>
       </Paper>
     </Grid>

@@ -37,15 +37,14 @@ function normalize(value) {
   }
 }
 
-function CustomizedProgressBars() {
+function CustomizedProgressBars({ username }) {
   const classes = useStyles();
   const [water, setWater] = useState();
-  const [user, setUser] = useState("");
 
   useEffect(() => {
     return db
       .collection("Water")
-      .where("user_name", "==", "emily nicholas")
+      .where("user_name", "==", username)
       .onSnapshot((snapshot) => {
         const waterArr = [];
         snapshot.forEach((doc) => {
@@ -57,7 +56,7 @@ function CustomizedProgressBars() {
         });
         setWater(waterArr.length);
       });
-  }, []);
+  }, [username]);
   return (
     <Grid item className={classes.root}>
       <BorderLinearProgress variant="determinate" value={normalize(water)} />
