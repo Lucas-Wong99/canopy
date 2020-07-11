@@ -37,9 +37,13 @@ const useStyles = makeStyles((theme) => ({
   },
   dataVis: {
     display: "flex",
+    justifyContent: "center",
   },
   waterVis: {
-    height: "100px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
@@ -77,6 +81,7 @@ function Dashboard() {
               <WeeklyDataVis />
             </Box>
             <Box className={classes.waterVis}>
+              <h1> Daily Water intake</h1>
               <CustomizedProgressBars />
             </Box>
           </Paper>
