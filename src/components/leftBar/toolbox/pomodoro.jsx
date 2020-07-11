@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { makeStyles } from "@material-ui/core/styles";
 import "./pomodoro.css";
-import { functions } from "../../firebase";
+import { functions } from "../../../firebase";
 
 function Pomodoro() {
   //Firebase functionality

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { db, functions } from "../../firebase";
+import { db, functions } from "../../../firebase";
 // import { Timestamp } from "@google-cloud/firestore";
 
 const useStyles = makeStyles((theme) => ({

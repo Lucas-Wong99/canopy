@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "grommet";
-import { functions } from "../firebase";
+import { functions } from "../../firebase";
 
 function CreateStatus() {
   const send = () => {

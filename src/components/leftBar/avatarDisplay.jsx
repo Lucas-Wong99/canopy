@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
-import User from "./users";
+import { db } from "../../firebase";
+import User from "../users";
 import { Grid } from "@material-ui/core";
 
 function Avatar_Display() {
