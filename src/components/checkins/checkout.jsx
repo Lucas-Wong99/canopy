@@ -1,7 +1,7 @@
 import React from "react";
 import { Backdrop, Button, Paper, Slider, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ToolSelector from "./toolSelector";
+import ToolRater from "./toolRater";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -83,7 +83,7 @@ const DiscreteSlider = function () {
   return (
     <div className={classes.slider}>
       <Typography id="discrete-slider-always">
-        How would you rate your wellness today?
+        How would you rate your wellness after today?
       </Typography>
       <Slider
         defaultValue={8}
@@ -99,7 +99,7 @@ const DiscreteSlider = function () {
   );
 };
 
-export default function SimpleBackdrop() {
+export default function Checkout() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -112,14 +112,14 @@ export default function SimpleBackdrop() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleToggle}>
-        Checkin
+        Checkout
       </Button>
 
       <Backdrop className={classes.backdrop} open={open}>
         <Paper className={classes.paper} elevation={3} variant="outlined">
           <DiscreteSlider />
 
-          <ToolSelector />
+          <ToolRater />
 
           <Button
             className={classes.button}
