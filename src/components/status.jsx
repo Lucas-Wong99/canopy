@@ -10,7 +10,13 @@ function Status({ id, date_created, user_name, status, claps }) {
     const incrementClaps = functions.httpsCallable("incrementClaps");
     incrementClaps({
       id: statusId
-    });
+    })
+      .then(() => {
+        return;
+      })
+      .catch((err) => {
+        return err;
+      });
   };
 
   return (

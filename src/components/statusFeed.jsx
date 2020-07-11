@@ -3,9 +3,10 @@ import { db } from "../firebase";
 import Status from "./status";
 // import { Grid, Paper, Box } from "@material-ui/core";
 
-function StatusFeed() {
+function StatusFeed({ setStatusCount }) {
   const [statusFeed, setStatusFeed] = useState([]);
 
+  // Could refactor to only query for the last 10 or something
   useEffect(() => {
     return db
       .collection("Status")
@@ -22,6 +23,7 @@ function StatusFeed() {
           })
         );
         setStatusFeed(statusData);
+        setStatusCount(statusData.length);
       });
   }, []);
 

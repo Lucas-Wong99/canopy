@@ -5,8 +5,6 @@ import Dashboard from "./dashboard/dashboard";
 import { Container } from "@material-ui/core";
 import { messaging, functions } from "../firebase";
 
-
-
 function App() {
   const sendToken = (token) => {
     const sendTokenToFirestore = functions.httpsCallable(
@@ -14,7 +12,14 @@ function App() {
     );
     sendTokenToFirestore({
       token
-    });
+    })
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .catch((err) => {
+        return err;
+      });
   };
   useEffect(() => {
     messaging
