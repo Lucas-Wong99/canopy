@@ -1,4 +1,4 @@
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import firebase from "firebase";
 
 var provider = new firebase.auth.GoogleAuthProvider();
