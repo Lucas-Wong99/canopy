@@ -1,13 +1,14 @@
 import React from "react";
-import Pomodoro from "./pomodoro"
+import Pomodoro from "./pomodoro";
+import WaterButton from "./water_btn";
 
 function Toolbox() {
-
-
-  return(
-    <Pomodoro />
-  )
+  return (
+    <div>
+      <Pomodoro />
+      <WaterButton />
+    </div>
+  );
 }
 
-
-export default Toolbox
+export default Toolbox;
