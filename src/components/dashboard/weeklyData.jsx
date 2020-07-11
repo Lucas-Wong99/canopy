@@ -7,7 +7,7 @@ import { db, functions } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   dataVis: {
-    display: "flex"
+    // display: "flex",
   },
   daily: {
     // display: "flex",
@@ -45,9 +45,9 @@ function WeeklyDataVis() {
       });
   };
 
-  // useEffect(() => {
-  //   accessId();
-  // }, []);
+  useEffect(() => {
+    // accessId();
+  }, []);
 
   useEffect(() => {
     return db
@@ -61,7 +61,7 @@ function WeeklyDataVis() {
           const now = new Date();
           const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
           if (
-            doc.data().date_created.seconds > lastMidnight &&
+            doc.data().date_created.seconds < lastMidnight &&
             doc.data().status === "needs a social break!"
           ) {
             socialArr.push(doc.data());
@@ -73,7 +73,7 @@ function WeeklyDataVis() {
             coffeeArr.push(doc.data());
           }
           if (
-            doc.data().date_created.seconds > lastMidnight &&
+            doc.data().date_created.seconds < lastMidnight &&
             doc.data().status ===
               "is starting a about to start a deep work session"
           ) {
