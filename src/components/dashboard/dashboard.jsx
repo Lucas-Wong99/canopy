@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  vines: {
+    position: "absolute",
+    top: "150px",
+    left: "10px"
+  }
 }));
 
 function Dashboard() {
@@ -79,7 +84,7 @@ function Dashboard() {
 
             <CreateStatus />
 
-            <Vines />
+            <Vines className={classes.vines}/>
 
             <Toolbox />
           </Paper>
