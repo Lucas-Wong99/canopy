@@ -11,7 +11,7 @@ function Pomodoro() {
       status
     })
       .then((res) => {
-        console.log("USERNAME!!!!", res);
+        console.log("New Status", res);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +36,7 @@ function Pomodoro() {
     }
     if (!time >= 1) {
       setPlay(false);
-      addStatus("Finshed");
+      addStatus("Finished");
     }
 
     return () => {
