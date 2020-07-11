@@ -4,8 +4,7 @@ import Dashboard from "./dashboard/dashboard";
 // import { Grommet } from "grommet";
 import { Container } from "@material-ui/core";
 import { messaging, functions } from "../firebase";
-import Checkin from "./checkins/morningCheckin"
-import Checkout from "./checkins/checkout"
+
 
 
 function App() {
@@ -41,8 +40,6 @@ function App() {
   return (
     <div>
       <Container maxWidth={false}>
-        <Checkin />
-        <Checkout />
         <Dashboard />
       </Container>
     </div>
