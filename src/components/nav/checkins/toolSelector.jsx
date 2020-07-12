@@ -9,27 +9,25 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   formControl: {
-    margin: theme.spacing(3)
-  }
+    margin: theme.spacing(3),
+  },
 }));
 
 //Need to circle back and extract state up to the parent level (maybe all the way up to the top so it can be passed back down to conditionally render the tools picked)
-export default function ToolSelector() {
+export default function ToolSelector({ toolSelector, setToolSelector }) {
   const classes = useStyles();
-  const [state, setState] = useState({
-    pomodoro: true,
-    water: false,
-    stretch: false
-  });
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setToolSelector({
+      ...toolSelector,
+      [event.target.name]: event.target.checked,
+    });
   };
 
-  const { pomodoro, water, stretch } = state;
+  const { pomodoro, water, stretch } = toolSelector;
   // const error = [pomodoro, water, stretch].filter((v) => v).length !== 2;
 
   return (

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Backdrop, Button, Paper, Slider, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ToolSelector from "./toolSelector";
+import { functions } from "../../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,12 +74,13 @@ const marks = [
   },
 ];
 
-function valuetext(value) {
-  return `${value}`;
-}
-
-const DiscreteSlider = function () {
+const DiscreteSlider = function ({ setWellnessScore }) {
   const classes = useStyles();
+
+  function valuetext(event, value) {
+    setWellnessScore(value);
+    return `${value}`;
+  }
 
   return (
     <div className={classes.slider}>
@@ -87,9 +89,9 @@ const DiscreteSlider = function () {
       </Typography>
       <Slider
         defaultValue={8}
-        getAriaValueText={valuetext}
         aria-labelledby="discrete-slider-always"
         step={1}
+        onChangeCommitted={valuetext}
         marks={marks}
         max={10}
         min={1}
@@ -101,12 +103,36 @@ const DiscreteSlider = function () {
 
 export default function SimpleBackdrop() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [wellnessScore, setWellnessScore] = useState(0);
+  const [toolSelector, setToolSelector] = useState({
+    pomodoro: true,
+    water: false,
+    stretch: false,
+  });
+  const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
   const handleToggle = () => {
     setOpen(!open);
+  };
+
+  const createCheck = (wellnessScore, pomodoro, water, stretch) => {
+    const morningCheckin = functions.httpsCallable("morningCheckin");
+    morningCheckin({
+      moodStart: wellnessScore,
+      pomodoro: pomodoro,
+      stretch: stretch,
+      water: water,
+    })
+      .then((data) => {
+        localStorage.setItem("morningCheckinId", data.data.dailyId);
+        // console.log("success!", data.data.dailyId);
+      })
+      .catch((error) => {
+        console.log("error");
+        return error;
+      });
   };
 
   return (
@@ -117,15 +143,26 @@ export default function SimpleBackdrop() {
 
       <Backdrop className={classes.backdrop} open={open}>
         <Paper className={classes.paper} elevation={3} variant="outlined">
-          <DiscreteSlider />
+          <DiscreteSlider setWellnessScore={setWellnessScore} />
 
-          <ToolSelector />
+          <ToolSelector
+            toolSelector={toolSelector}
+            setToolSelector={setToolSelector}
+          />
 
           <Button
             className={classes.button}
             variant="outlined"
             color="primary"
-            onClick={handleToggle}
+            onClick={() => {
+              handleToggle();
+              createCheck(
+                wellnessScore,
+                toolSelector.pomodoro,
+                toolSelector.water,
+                toolSelector.stretch
+              );
+            }}
           >
             Submit
           </Button>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Backdrop, Button, Paper, Slider, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ToolRater from "./toolRater";
+import { functions } from "../../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,12 +74,13 @@ const marks = [
   },
 ];
 
-function valuetext(value) {
-  return `${value}`;
-}
-
-const DiscreteSlider = function () {
+const DiscreteSlider = function ({ setWellnessScore }) {
   const classes = useStyles();
+
+  function valuetext(event, value) {
+    setWellnessScore(value);
+    return `${value}`;
+  }
 
   return (
     <div className={classes.slider}>
@@ -87,9 +89,9 @@ const DiscreteSlider = function () {
       </Typography>
       <Slider
         defaultValue={8}
-        getAriaValueText={valuetext}
         aria-labelledby="discrete-slider-always"
         step={1}
+        onChangeCommitted={valuetext}
         marks={marks}
         max={10}
         min={1}
@@ -101,12 +103,36 @@ const DiscreteSlider = function () {
 
 export default function Checkout() {
   const classes = useStyles();
+  const [wellnessScore, setWellnessScore] = useState(0);
+  const [toolRater, setToolRater] = useState({
+    pomodoro: true,
+    water: false,
+    stretch: false,
+  });
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
   };
   const handleToggle = () => {
     setOpen(!open);
+  };
+
+  const updateCheck = (wellnessScore, pomodoro, water, stretch) => {
+    const checkinUpdate = functions.httpsCallable("checkinUpdate");
+    checkinUpdate({
+      moodEnd: wellnessScore,
+      pomRate: pomodoro,
+      stretchRate: stretch,
+      waterRate: water,
+      dailyId: localStorage.getItem("morningCheckinId"),
+    })
+      .then(() => {
+        console.log("success!");
+      })
+      .catch((error) => {
+        console.log("error");
+        return error;
+      });
   };
 
   return (
@@ -117,15 +143,23 @@ export default function Checkout() {
 
       <Backdrop className={classes.backdrop} open={open}>
         <Paper className={classes.paper} elevation={3} variant="outlined">
-          <DiscreteSlider />
+          <DiscreteSlider setWellnessScore={setWellnessScore} />
 
-          <ToolRater />
+          <ToolRater setToolRater={setToolRater} toolRater={toolRater} />
 
           <Button
             className={classes.button}
             variant="outlined"
             color="primary"
-            onClick={handleToggle}
+            onClick={() => {
+              handleToggle();
+              updateCheck(
+                wellnessScore,
+                toolRater.pomodoro,
+                toolRater.water,
+                toolRater.stretch
+              );
+            }}
           >
             Submit
           </Button>

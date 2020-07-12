@@ -62,9 +62,19 @@ exports.incrementClaps = functions.https.onCall((data, context) => {
 //A Cloud Function to get userID from User Collection in firestore
 exports.getUserId = functions.https.onCall((data, context) => {
   console.log("USER ID", context.auth.token.name);
-  return {
-    userId: context.auth.token.name,
-  };
+  return admin
+    .firestore()
+    .collection("Bait")
+    .doc("Hello")
+    .get()
+    .then(() => {
+      return {
+        userId: context.auth.token.name,
+      };
+    })
+    .catch((err) => {
+      return err;
+    });
 });
 
 //A Cloud Function to save a device token of the current user in firestore
@@ -127,6 +137,54 @@ exports.addWater = functions.https.onCall((data, context) => {
       };
     })
     .catch((error) => {
+      return error;
+    });
+});
+
+exports.morningCheckin = functions.https.onCall((data, context) => {
+  const user = context.auth.token.name || null;
+  const newCheckin = admin.firestore().collection("Daily").add({
+    date_created: admin.firestore.FieldValue.serverTimestamp(),
+    user_name: user,
+    moodStart: data.moodStart,
+    moodEnd: 0,
+    pomodoro: data.pomodoro,
+    pomRate: false,
+    stetch: data.stretch,
+    stretchRate: false,
+    water: data.water,
+    waterRate: false,
+  });
+  return newCheckin
+    .then((res) => {
+      // console.log("res", res._path.segments);
+      return {
+        dailyId: res._path.segments[1],
+      };
+    })
+    .catch((error) => {
+      console.log();
+      return error;
+    });
+});
+
+exports.checkinUpdate = functions.https.onCall((data, context) => {
+  const id = data.dailyId;
+  console.log("DAILY ID", id);
+  const eveningCheckin = admin.firestore().collection("Daily").doc(id).update({
+    moodEnd: data.moodEnd,
+    pomRate: data.pomRate,
+    stretchRate: data.stretchRate,
+    waterRate: data.waterRate,
+  });
+  return eveningCheckin
+    .then(() => {
+      return {
+        text: "Success",
+      };
+    })
+    .catch((error) => {
+      console.log("did not update daily check-in");
       return error;
     });
 });
