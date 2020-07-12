@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StatusFeed from "../statusFeed";
 import DailyDataVis from "./data/dailyData";
 import WeeklyDataVis from "./data/weeklyData";
+import CheckinData from "./data/checkinData";
 import CustomizedProgressBars from "./data/waterData";
 import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -157,6 +158,7 @@ export default function RightBar({ setStatusCount }) {
           <h1> Daily Water intake</h1>
           <CustomizedProgressBars username={user} />
         </Box>
+        <CheckinData username={user} />
       </Paper>
     </Grid>
   );
