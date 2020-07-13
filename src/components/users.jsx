@@ -29,32 +29,45 @@ function User({ name, photoURL, current_status, token }) {
         borderRadius: "50%",
         animation: "$ripple 1.2s infinite ease-in-out",
         border: "1px solid currentColor",
-        content: '""'
-      }
+        content: '""',
+      },
     },
     "@keyframes ripple": {
       "0%": {
         transform: "scale(.8)",
-        opacity: 1
+        opacity: 1,
       },
       "100%": {
         transform: "scale(2.4)",
-        opacity: 0
-      }
-    }
+        opacity: 0,
+      },
+    },
+  }))(Badge);
+
+  const StyledBadge2 = withStyles((theme) => ({
+    badge: {
+      backgroundColor: theme.palette.background.paper,
+      color: "black",
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      "&:hover": {
+        cursor: "pointer",
+        background: "#7CA982",
+        color: theme.palette.background.paper,
+      },
+    },
   }))(Badge);
 
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
       "& > *": {
-        margin: theme.spacing(1)
-      }
+        margin: theme.spacing(1),
+      },
     },
     large: {
       width: theme.spacing(15),
-      height: theme.spacing(15)
-    }
+      height: theme.spacing(15),
+    },
   }));
 
   const classes = useStyles();
@@ -62,7 +75,7 @@ function User({ name, photoURL, current_status, token }) {
   const send = (token) => {
     const sendMessage = functions.httpsCallable("sendMessage");
     sendMessage({
-      token
+      token,
     })
       .then((res) => {
         console.log("USERNAME!!!!", res);
@@ -74,17 +87,27 @@ function User({ name, photoURL, current_status, token }) {
 
   return (
     <Grid item className={classes.root}>
-      <StyledBadge
+      <StyledBadge2
         overlap="circle"
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right"
+          horizontal: "left",
         }}
-        badgeContent=" "
+        badgeContent="nudge"
+        onClick={() => send(token)}
       >
-        <Avatar className={classes.large} alt={name} src={photoURL} />
-      </StyledBadge>
-      <button onClick={() => send(token)}>Nudge</button>
+        <StyledBadge
+          overlap="circle"
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          badgeContent=" "
+        >
+          <Avatar className={classes.large} alt={name} src={photoURL} />
+        </StyledBadge>
+      </StyledBadge2>
+      {/* <button onClick={() => send(token)}>Nudge</button> */}
     </Grid>
   );
 }
