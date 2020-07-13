@@ -11,7 +11,6 @@ function StatusFeed({ setStatusCount }) {
     return db
       .collection("Status")
       .orderBy("date_created")
-      .limit(15)
       .onSnapshot((snapshot) => {
         const statusData = [];
         snapshot.forEach((doc) =>
