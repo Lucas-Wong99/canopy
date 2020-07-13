@@ -5,9 +5,7 @@ import { db } from "../../../firebase";
 function CheckinData({ username }) {
   function dateConv(secs) {
     const date = new Date(secs * 1000);
-    console.log(date);
     let day = date.getDay();
-    console.log(day);
     if (day === 1) {
       return "Monday";
     } else if (day === 2) {
@@ -18,6 +16,8 @@ function CheckinData({ username }) {
       return "Thursday";
     } else if (day === 5) {
       return "Friday";
+    } else {
+      return "No Data";
     }
   }
   const [today, setToday] = useState({});
