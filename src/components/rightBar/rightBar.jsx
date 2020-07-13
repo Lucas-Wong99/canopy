@@ -12,7 +12,7 @@ import { db } from "../../firebase";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   waterVis: {
     display: "flex",

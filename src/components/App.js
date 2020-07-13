@@ -9,12 +9,35 @@ import green from '@material-ui/core/colors/green';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: purple[500],
+      light: '#acdbb2',
+      main: '#7ca982',
+      dark: '#4f7a55',
+      contrastText: '#000000',
     },
     secondary: {
-      main: green[500],
+      light: '#4c685f',
+      main: '#243e36',
+      dark: '#00180f',
+      contrastText: '#ffffff',
     },
   },
+  typography: {
+    fontFamily: 'Raleway, Arial',
+  },
+  spacing: 8,
+  // breakpoints: {
+  //   values: {
+  //     xs: 0,
+  //     sm: 600,
+  //     md: 960,
+  //     lg: 1280,
+  //     xl: 1920,
+  //   }
+  // },
+  //density:
+  //z-index
+  //overrides
+
 });
 
 function App() {
