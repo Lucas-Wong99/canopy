@@ -1,9 +1,43 @@
 import React, { useEffect } from "react";
 import Dashboard from "./dashboard/dashboard";
-// import { auth } from "../firebase";
-// import { Grommet } from "grommet";
 import { Container } from "@material-ui/core";
 import { messaging, functions } from "../firebase";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#acdbb2',
+      main: '#7ca982',
+      dark: '#4f7a55',
+      contrastText: '#000000',
+    },
+    secondary: {
+      light: '#4c685f',
+      main: '#243e36',
+      dark: '#00180f',
+      contrastText: '#ffffff',
+    },
+  },
+  typography: {
+    fontFamily: "'Montserrat', sans-serif"
+  },
+  spacing: 8,
+
+  // breakpoints: {
+  //   values: {
+  //     xs: 0,
+  //     sm: 600,
+  //     md: 960,
+  //     lg: 1280,
+  //     xl: 1920,
+  //   }
+  // },
+  //density:
+  //z-index
+  //overrides
+
+});
 
 function App() {
   const sendToken = (token) => {
@@ -36,18 +70,14 @@ function App() {
     navigator.serviceWorker.addEventListener("message", (message) =>
       console.log(message)
     );
-
-    // messaging.onMessage(function (payload) {
-    //   console.log("Payload", payload);
-    // });
   }, []);
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Container maxWidth={false}>
         <Dashboard />
       </Container>
-    </div>
+    </ThemeProvider>
   );
 }
 
