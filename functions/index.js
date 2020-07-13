@@ -10,7 +10,7 @@ exports.newUser = functions.auth.user().onCreate((user) => {
     name: user.displayName,
     photoURL: user.photoURL,
     current_status: "Chillin",
-    deviceToken: "",
+    deviceToken: ""
   });
 });
 
@@ -23,16 +23,16 @@ exports.addStatus = functions.https.onCall((data, context) => {
     user_name: user,
     status: userStatus,
     date_created: admin.firestore.FieldValue.serverTimestamp(),
-    claps: 0,
+    claps: 0
   });
   const updateUser = admin.firestore().collection("Users").doc(userId).update({
-    current_status: userStatus,
+    current_status: userStatus
   });
   const all = Promise.all([newStatus, updateUser]);
   return all
     .then(() => {
       return {
-        text: "hello",
+        text: "hello"
       };
     })
     .catch((err) => {
@@ -46,11 +46,11 @@ exports.incrementClaps = functions.https.onCall((data, context) => {
 
   return status
     .update({
-      claps: admin.firestore.FieldValue.increment(1),
+      claps: admin.firestore.FieldValue.increment(1)
     })
     .then(() => {
       return {
-        text: "hello",
+        text: "hello"
       };
     })
     .catch((err) => {
@@ -69,7 +69,7 @@ exports.getUserId = functions.https.onCall((data, context) => {
     .get()
     .then(() => {
       return {
-        userId: context.auth.token.name,
+        userId: context.auth.token.name
       };
     })
     .catch((err) => {
@@ -86,7 +86,7 @@ exports.sendTokenToFirestore = functions.https.onCall((data, context) => {
     .collection("Users")
     .doc(current_userId)
     .update({
-      deviceToken: token,
+      deviceToken: token
     })
     .then((res) => {
       console.log(res);
@@ -105,9 +105,9 @@ exports.sendMessage = functions.https.onCall((data, context) => {
   var message = {
     notification: {
       title: "Nudge!!",
-      body: "from:" + context.auth.token.name,
+      body: "from:" + context.auth.token.name
     },
-    token: token,
+    token: token
   };
 
   return admin
@@ -128,12 +128,12 @@ exports.addWater = functions.https.onCall((data, context) => {
   const user = context.auth.token.name || null;
   const newWater = admin.firestore().collection("Water").add({
     user_name: user,
-    date_created: admin.firestore.FieldValue.serverTimestamp(),
+    date_created: admin.firestore.FieldValue.serverTimestamp()
   });
   return newWater
     .then(() => {
       return {
-        text: "hello",
+        text: "hello"
       };
     })
     .catch((error) => {
@@ -141,6 +141,7 @@ exports.addWater = functions.https.onCall((data, context) => {
     });
 });
 
+//A cloud function that creates a new checkin dataset for each day for a specific user
 exports.morningCheckin = functions.https.onCall((data, context) => {
   const user = context.auth.token.name || null;
   const newCheckin = admin.firestore().collection("Daily").add({
@@ -153,13 +154,13 @@ exports.morningCheckin = functions.https.onCall((data, context) => {
     stetch: data.stretch,
     stretchRate: false,
     water: data.water,
-    waterRate: false,
+    waterRate: false
   });
   return newCheckin
     .then((res) => {
       // console.log("res", res._path.segments);
       return {
-        dailyId: res._path.segments[1],
+        dailyId: res._path.segments[1]
       };
     })
     .catch((error) => {
@@ -168,6 +169,7 @@ exports.morningCheckin = functions.https.onCall((data, context) => {
     });
 });
 
+//A cloud function that updates the previously created checkin data
 exports.checkinUpdate = functions.https.onCall((data, context) => {
   const id = data.dailyId;
   console.log("DAILY ID", id);
@@ -175,12 +177,12 @@ exports.checkinUpdate = functions.https.onCall((data, context) => {
     moodEnd: data.moodEnd,
     pomRate: data.pomRate,
     stretchRate: data.stretchRate,
-    waterRate: data.waterRate,
+    waterRate: data.waterRate
   });
   return eveningCheckin
     .then(() => {
       return {
-        text: "Success",
+        text: "Success"
       };
     })
     .catch((error) => {
