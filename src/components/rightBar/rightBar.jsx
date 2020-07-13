@@ -6,7 +6,7 @@ import CheckinData from "./data/checkinData";
 import CustomizedProgressBars from "./data/waterData";
 import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { db, functions } from "../../firebase";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   dataVis: {
@@ -34,32 +34,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RightBar({ setStatusCount }) {
+export default function RightBar({ setStatusCount, user }) {
   const classes = useStyles();
 
-  const [user, setUser] = useState("");
   const [workDay, setWorkDay] = useState(0);
   const [coffeeDay, setCoffeeDay] = useState(0);
   const [socialDay, setSocialDay] = useState(0);
   const [workWeek, setWorkWeek] = useState(0);
   const [coffeeWeek, setCoffeeWeek] = useState(0);
   const [socialWeek, setSocialWeek] = useState(0);
-
-  const accessId = () => {
-    const getUserId = functions.httpsCallable("getUserId");
-    getUserId()
-      .then((data) => {
-        setUser(data.data.userId);
-        // return data.data.userId;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    accessId();
-  }, []);
 
   // Just a note that we're not confident the if (user) in this Effect hook is working properly,
   // and we want to test later
