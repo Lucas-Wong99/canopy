@@ -9,6 +9,7 @@ const DiscreteSlider = function ({ setWellnessScore }) {
   const classes = useStyles();
 
   function valuetext(event, value) {
+    console.log("Within Value text", value);
     setWellnessScore(value);
     return `${value}`;
   }
@@ -49,6 +50,7 @@ export default function Checkout() {
   };
 
   const updateCheck = (wellnessScore, pomodoro, water, stretch) => {
+    console.log("The wellness Score", wellnessScore);
     const checkinUpdate = functions.httpsCallable("checkinUpdate");
     checkinUpdate({
       moodEnd: wellnessScore,

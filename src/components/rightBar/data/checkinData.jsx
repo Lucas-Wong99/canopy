@@ -5,9 +5,7 @@ import { db } from "../../../firebase";
 function CheckinData({ username }) {
   function dateConv(secs) {
     const date = new Date(secs * 1000);
-    console.log("date", date);
     let day = date.getDay();
-    console.log("day", day);
     if (day === 1) {
       return "Monday";
     } else if (day === 2) {
@@ -39,7 +37,7 @@ function CheckinData({ username }) {
           wednesday.moodEnd - wednesday.moodStart,
           thursday.moodEnd - thursday.moodStart,
           friday.moodEnd - friday.moodStart,
-          today.moodEnd - today.moodStart,
+          today.moodEnd - today.moodStart
         ],
         fill: false,
         borderColor: "#EC932F",
@@ -48,7 +46,7 @@ function CheckinData({ username }) {
         pointBackgroundColor: "#EC932F",
         pointHoverBackgroundColor: "#EC932F",
         pointHoverBorderColor: "#EC932F",
-        yAxisID: "y-axis-1",
+        yAxisID: "y-axis-1"
       },
       {
         label: "Wellness Score Start",
@@ -59,7 +57,7 @@ function CheckinData({ username }) {
           wednesday.moodStart,
           thursday.moodStart,
           friday.moodStart,
-          today.moodStart,
+          today.moodStart
         ],
         fill: false,
         // borderColor: "#EC932F",
@@ -68,7 +66,7 @@ function CheckinData({ username }) {
         // pointBackgroundColor: "#EC932F",
         // pointHoverBackgroundColor: "#EC932F",
         // pointHoverBorderColor: "#EC932F",
-        yAxisID: "y-axis-1",
+        yAxisID: "y-axis-1"
       },
       {
         label: "Wellness Score End",
@@ -79,7 +77,7 @@ function CheckinData({ username }) {
           wednesday.moodEnd,
           thursday.moodEnd,
           friday.moodEnd,
-          today.moodEnd,
+          today.moodEnd
         ],
         fill: false,
         // borderColor: "#EC932F",
@@ -88,8 +86,8 @@ function CheckinData({ username }) {
         // pointBackgroundColor: "#2f71a9",
         // pointHoverBackgroundColor: "#2f71a9",
         // pointHoverBorderColor: "#2f71a9",
-        yAxisID: "y-axis-1",
-      },
+        yAxisID: "y-axis-1"
+      }
       // {
       //   label: "Stretch",
       //   type: "bar",
@@ -123,25 +121,25 @@ function CheckinData({ username }) {
       //   hoverBorderColor: "#71B37C",
       //   yAxisID: "y-axis-1",
       // },
-    ],
+    ]
   };
 
   const options = {
     responsive: true,
     tooltips: {
-      mode: "label",
+      mode: "label"
     },
     elements: {
       line: {
-        fill: false,
-      },
+        fill: false
+      }
     },
     scales: {
       xAxes: [
         {
           display: true,
           gridLines: {
-            display: false,
+            display: false
           },
           labels: [
             dateConv(monday.date),
@@ -149,9 +147,9 @@ function CheckinData({ username }) {
             dateConv(wednesday.date),
             dateConv(thursday.date),
             dateConv(friday.date),
-            "Today",
-          ],
-        },
+            "Today"
+          ]
+        }
       ],
       yAxes: [
         {
@@ -160,12 +158,12 @@ function CheckinData({ username }) {
           position: "left",
           id: "y-axis-1",
           gridLines: {
-            display: false,
+            display: false
           },
           labels: {
-            show: true,
-          },
-        },
+            show: true
+          }
+        }
         // {
         //   type: "linear",
         //   display: true,
@@ -178,8 +176,8 @@ function CheckinData({ username }) {
         //     show: true,
         //   },
         // },
-      ],
-    },
+      ]
+    }
   };
 
   const plugins = [
@@ -187,8 +185,8 @@ function CheckinData({ username }) {
       afterDraw: (chartInstance, easing) => {
         const ctx = chartInstance.chart.ctx;
         ctx.fillText("", 150, 100);
-      },
-    },
+      }
+    }
   ];
 
   useEffect(() => {
@@ -209,7 +207,7 @@ function CheckinData({ username }) {
             setMonday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay &&
@@ -218,7 +216,7 @@ function CheckinData({ username }) {
             setTuesday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 2 &&
@@ -227,7 +225,7 @@ function CheckinData({ username }) {
             setWednesday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 3 &&
@@ -236,7 +234,7 @@ function CheckinData({ username }) {
             setThursday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 4 &&
@@ -245,13 +243,13 @@ function CheckinData({ username }) {
             setFriday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           } else if (doc.data().date_created.seconds > lastMidnight) {
             setToday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds,
+              date: doc.data().date_created.seconds
             });
           }
         });
