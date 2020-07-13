@@ -3,8 +3,6 @@ import Dashboard from "./dashboard/dashboard";
 import { Container } from "@material-ui/core";
 import { messaging, functions } from "../firebase";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,9 +20,10 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'Raleway, Arial',
+    fontFamily: "'Montserrat', sans-serif"
   },
   spacing: 8,
+
   // breakpoints: {
   //   values: {
   //     xs: 0,
