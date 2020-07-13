@@ -303,17 +303,7 @@ function Vines({ statusCount }) {
   }, [state.interations]);
 
   return (
-    <div>
-      <canvas ref={canvasEl} height="400" width="400" />
-      <button
-        onClick={() =>
-          setState((prev) => ({ ...prev, interations: prev.interations + 1 }))
-        }
-      >
-        {" "}
-        Button
-      </button>
-    </div>
+    <canvas ref={canvasEl} height="400" width="400" />
   );
 }
 
