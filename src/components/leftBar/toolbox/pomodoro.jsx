@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { functions } from "../../../firebase";
-import "./pomodoro.css";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
@@ -121,7 +120,6 @@ function Pomodoro() {
         <h1 className={classes.time}> {format(time)} </h1>
         <p>Let's track your Canopy time</p>
       </div>
-
       <ButtonGroup
         variant="text"
         color="primary"
@@ -146,62 +144,18 @@ function Pomodoro() {
         </Button>
 
         <Button
-          onClick={() => {
+          onClick=
+          {() => {
             addStatus("Is taking a coffee break. You should come!");
             reset(10);
           }}
-        >
-          Coffee Break
+          > Coffee Break
         </Button>
       </ButtonGroup>
 
-      <Button
-        // className={play ? "stop btnIcon" : "play btnIcon"}
-        onClick={toggle}
-      >
+      <Button variant="contained" color="primary" onClick={toggle}>
         {play ? "Pause" : "Start"}
       </Button>
-
-      {/* <div className="container display types">
-        <button
-          className="btn"
-          onClick={() => {
-            addStatus("is about to start a deep work session");
-            reset(10);
-          }}
-        >
-          Deep Work
-        </button>
-
-        <button
-          className="btn"
-          onClick={() => {
-            addStatus("needs a social break!");
-            reset(10);
-          }}
-        >
-          Social
-        </button>
-
-        <button
-          className="btn"
-          onClick={() => {
-            addStatus("Is taking a coffee break. You should come!");
-            reset(10);
-          }}
-        >
-          Coffee
-        </button>
-      </div>
-
-      <div className="container">
-        <div className="controlsPlay">
-          <button
-            className={play ? "stop btnIcon" : "play btnIcon"}
-            onClick={toggle}
-          ></button>
-        </div>
-      </div> */}
     </div>
   );
 }
