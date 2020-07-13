@@ -1,41 +1,14 @@
 import React, { useState } from "react";
-import { Backdrop, Button, Paper, Slider, Typography } from "@material-ui/core";
+import { Backdrop, Button, Paper } from "@material-ui/core";
 import { functions } from "../../../firebase";
-import { useStyles, marks } from "../../../hooks/checkin/dailyCheck-in";
+import { useStyles } from "../../../hooks/checkin/dailyCheck-in";
 
+import DiscreteSlider from "./slider";
 import ToolRater from "./toolRater";
-
-const DiscreteSlider = function ({ setWellnessScore }) {
-  const classes = useStyles();
-
-  function valuetext(event, value) {
-    console.log("Within Value text", value);
-    setWellnessScore(value);
-    return `${value}`;
-  }
-
-  return (
-    <div className={classes.slider}>
-      <Typography id="discrete-slider-always">
-        How would you rate your wellness after today?
-      </Typography>
-      <Slider
-        defaultValue={8}
-        aria-labelledby="discrete-slider-always"
-        step={1}
-        onChangeCommitted={valuetext}
-        marks={marks}
-        max={10}
-        min={1}
-        valueLabelDisplay="on"
-      />
-    </div>
-  );
-};
 
 export default function Checkout() {
   const classes = useStyles();
-  const [wellnessScore, setWellnessScore] = useState(0);
+  const [wellnessScore, setWellnessScore] = useState(8);
   const [toolRater, setToolRater] = useState({
     pomodoro: true,
     water: false,
@@ -50,7 +23,6 @@ export default function Checkout() {
   };
 
   const updateCheck = (wellnessScore, pomodoro, water, stretch) => {
-    console.log("The wellness Score", wellnessScore);
     const checkinUpdate = functions.httpsCallable("checkinUpdate");
     checkinUpdate({
       moodEnd: wellnessScore,
@@ -76,7 +48,7 @@ export default function Checkout() {
 
       <Backdrop className={classes.backdrop} open={open}>
         <Paper className={classes.paper} elevation={3} variant="outlined">
-          <DiscreteSlider setWellnessScore={setWellnessScore} />
+          <DiscreteSlider setWellnessScore={setWellnessScore} time={"after"} />
 
           <ToolRater setToolRater={setToolRater} toolRater={toolRater} />
 

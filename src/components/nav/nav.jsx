@@ -28,7 +28,7 @@ export default function Nav({ user }) {
         {/* Paper can give us our slight shadow, holds other things */}
         <img height="75px" src="/CanopyLogo.png" alt="Canopy Logo" />
         <span className={classes.brandPaper}>
-          <p>Hello, {user}! Welcome to Canopy</p>
+          <p>Hello, {user}! Welcome To The Canopy</p>
           <button onClick={() => googleSignin()}>Google Signin</button>
         </span>
         <span className={classes.brandPaper}>
