@@ -3,12 +3,42 @@ import { Bar } from "react-chartjs-2";
 import { db } from "../../../firebase";
 
 function CheckinData({ username }) {
+  function dateConv(secs) {
+    const date = new Date(secs * 1000);
+    console.log(date);
+    let day = date.getDay();
+    console.log(day);
+    if (day === 1) {
+      return "Monday";
+    } else if (day === 2) {
+      return "Tuesday";
+    } else if (day === 3) {
+      return "Wednesday";
+    } else if (day === 4) {
+      return "Thursday";
+    } else if (day === 5) {
+      return "Friday";
+    }
+  }
+  const [today, setToday] = useState({});
+  const [monday, setMonday] = useState({});
+  const [tuesday, setTuesday] = useState({});
+  const [wednesday, setWednesday] = useState({});
+  const [thursday, setThursday] = useState({});
+  const [friday, setFriday] = useState({});
   const data = {
     datasets: [
       {
         label: "Wellness Score Change",
         type: "line",
-        data: [2, -2, 6, 8, -9, 0],
+        data: [
+          monday.moodEnd - monday.moodStart,
+          tuesday.moodEnd - tuesday.moodStart,
+          wednesday.moodEnd - wednesday.moodStart,
+          thursday.moodEnd - thursday.moodStart,
+          friday.moodEnd - friday.moodStart,
+          today.moodEnd - today.moodStart,
+        ],
         fill: false,
         borderColor: "#EC932F",
         backgroundColor: "#EC932F",
@@ -21,7 +51,14 @@ function CheckinData({ username }) {
       {
         label: "Wellness Score Start",
         type: "line",
-        data: [7],
+        data: [
+          monday.moodStart,
+          tuesday.moodStart,
+          wednesday.moodStart,
+          thursday.moodStart,
+          friday.moodStart,
+          today.moodStart,
+        ],
         fill: false,
         // borderColor: "#EC932F",
         // backgroundColor: "#EC932F",
@@ -34,7 +71,14 @@ function CheckinData({ username }) {
       {
         label: "Wellness Score End",
         type: "line",
-        data: [9],
+        data: [
+          monday.moodEnd,
+          tuesday.moodEnd,
+          wednesday.moodEnd,
+          thursday.moodEnd,
+          friday.moodEnd,
+          today.moodEnd,
+        ],
         fill: false,
         // borderColor: "#EC932F",
         // backgroundColor: "#2f71a9",
@@ -97,7 +141,14 @@ function CheckinData({ username }) {
           gridLines: {
             display: false,
           },
-          labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          labels: [
+            dateConv(monday.date),
+            dateConv(tuesday.date),
+            dateConv(wednesday.date),
+            dateConv(thursday.date),
+            dateConv(friday.date),
+            "Today",
+          ],
         },
       ],
       yAxes: [
@@ -133,16 +184,11 @@ function CheckinData({ username }) {
     {
       afterDraw: (chartInstance, easing) => {
         const ctx = chartInstance.chart.ctx;
-        ctx.fillText("This text drawn by a plugin", 150, 100);
+        ctx.fillText("", 150, 100);
       },
     },
   ];
 
-  const [monday, setMonday] = useState(0);
-  const [tuesday, setTuesday] = useState(0);
-  const [wednesday, setWednesday] = useState(0);
-  const [thursday, setThursday] = useState(0);
-  const [friday, setFriday] = useState(0);
   useEffect(() => {
     return db
       .collection("Daily")
@@ -156,8 +202,55 @@ function CheckinData({ username }) {
           const lastWeek = lastMidnight - secondsInAWeek;
           if (
             doc.data().date_created.seconds > lastWeek &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay
+          ) {
+            setMonday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay * 2
           ) {
+            setTuesday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay * 2 &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay * 3
+          ) {
+            setWednesday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay * 3 &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay * 4
+          ) {
+            setThursday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay * 4 &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay * 5
+          ) {
+            setFriday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (doc.data().date_created.seconds > lastMidnight) {
+            setToday({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
           }
         });
       });
