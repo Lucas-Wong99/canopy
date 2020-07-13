@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -9,11 +9,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   formControl: {
-    margin: theme.spacing(3),
-  },
+    margin: theme.spacing(3)
+  }
 }));
 
 //Need to circle back and extract state up to the parent level (maybe all the way up to the top so it can be passed back down to conditionally render the tools picked)
@@ -23,7 +23,7 @@ export default function ToolSelector({ toolSelector, setToolSelector }) {
   const handleChange = (event) => {
     setToolSelector({
       ...toolSelector,
-      [event.target.name]: event.target.checked,
+      [event.target.name]: event.target.checked
     });
   };
 

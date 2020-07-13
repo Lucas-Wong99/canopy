@@ -11,27 +11,27 @@ import { db, functions } from "../../firebase";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   rightPaper: {
-    height: "48%",
+    height: "48%"
   },
   rightBar: {
     height: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   status: {
     overflow: "auto",
-    height: "100%",
-  },
+    height: "100%"
+  }
 }));
 
 export default function RightBar({ setStatusCount }) {
@@ -98,8 +98,7 @@ export default function RightBar({ setStatusCount }) {
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status ===
-                "is starting a about to start a deep work session"
+              doc.data().status === "is about to start a deep work session"
             ) {
               workDayArr.push(doc.data());
             }
@@ -117,8 +116,7 @@ export default function RightBar({ setStatusCount }) {
             }
             if (
               doc.data().date_created.seconds > lastWeek &&
-              doc.data().status ===
-                "is starting a about to start a deep work session"
+              doc.data().status === "is about to start a deep work session"
             ) {
               workWeekArr.push(doc.data());
             }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -11,11 +11,11 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   formControl: {
-    margin: theme.spacing(3),
-  },
+    margin: theme.spacing(3)
+  }
 }));
 
 //Need to circle back and extract state up to the parent level (maybe all the way up to the top so it can be passed back down to conditionally render the tools picked)

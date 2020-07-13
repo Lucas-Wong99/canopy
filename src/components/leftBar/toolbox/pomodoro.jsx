@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-import "./pomodoro.css";
 import { functions } from "../../../firebase";
+import "./pomodoro.css";
+// import { makeStyles } from "@material-ui/core/styles";
 
 function Pomodoro() {
-  //Firebase functionality
+  const [currentStatus, setCurrentStatus] = useState("");
+  // Stateful Timers Client Side
+  const [time, setTime] = useState(1500);
+  const [play, setPlay] = useState(false);
+
+  //Firebase function to add Status to database
   const addStatus = (status) => {
+    setCurrentStatus(status);
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
       status
@@ -18,10 +24,27 @@ function Pomodoro() {
       });
   };
 
-  // Stateful Timers Client Side
-  const [time, setTime] = useState(1500);
-  const [play, setPlay] = useState(false);
+  const createNotificationTitle = (status) => {
+    if (status === "is about to start a deep work session") {
+      return "Break time! Your work session is over";
+    } else if (status === "needs a social break!") {
+      return "Your social break is over 🙂";
+    } else if (status === "Is taking a coffee break. You should come!") {
+      return "Coffee break is over!";
+    }
+  };
 
+  //Creates a client side notification when a timer ends
+  const timerNotification = (status) => {
+    const notificationTitle = createNotificationTitle(status);
+    const notification = new Notification(notificationTitle, {
+      icon: "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
+      body: ""
+    });
+    console.log(notification);
+  };
+
+  //Controls the timers
   useEffect(() => {
     let interval = null;
     if (!play) {
@@ -36,7 +59,17 @@ function Pomodoro() {
     }
     if (!time >= 1) {
       setPlay(false);
-      addStatus("Finished");
+      timerNotification(currentStatus);
+      //If statement that uses conditions to create the correct message
+      if (currentStatus === "is about to start a deep work session") {
+        addStatus("has finished a deep work session.");
+      } else if (currentStatus === "needs a social break!") {
+        addStatus("has finished a social break.");
+      } else if (
+        currentStatus === "Is taking a coffee break. You should come!"
+      ) {
+        addStatus("has finished a coffee break.");
+      }
     }
 
     return () => {
@@ -71,7 +104,7 @@ function Pomodoro() {
         <button
           className="btn"
           onClick={() => {
-            addStatus(`is starting a about to start a deep work session`);
+            addStatus("is about to start a deep work session");
             reset(10);
           }}
         >
@@ -91,7 +124,7 @@ function Pomodoro() {
         <button
           className="btn"
           onClick={() => {
-            addStatus(`Is taking a coffee break. You should come!`);
+            addStatus("Is taking a coffee break. You should come!");
             reset(10);
           }}
         >
@@ -107,7 +140,7 @@ function Pomodoro() {
           ></button>
         </div>
       </div>
-    </div> /* Pomodoro */
+    </div>
   );
 }
 
