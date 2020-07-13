@@ -1,78 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Backdrop, Button, Paper, Slider, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import ToolSelector from "./toolSelector";
 import { functions } from "../../../firebase";
+import { useStyles, marks } from "../../../hooks/checkin/dailyCheck-in";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "center",
-    margin: theme.spacing(10),
-    width: 400,
-    height: 600,
-  },
-
-  slider: {
-    width: 300,
-    height: theme.spacing(3),
-  },
-
-  button: {
-    height: "20px",
-    width: "100px",
-  },
-
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
-}));
-
-const marks = [
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
-  },
-  {
-    value: 6,
-    label: "6",
-  },
-  {
-    value: 7,
-    label: "7",
-  },
-  {
-    value: 8,
-    label: "8",
-  },
-  {
-    value: 9,
-    label: "9",
-  },
-  {
-    value: 10,
-    label: "10",
-  },
-];
+import ToolSelector from "./toolSelector";
 
 const DiscreteSlider = function ({ setWellnessScore }) {
   const classes = useStyles();
@@ -107,12 +38,12 @@ export default function SimpleBackdrop() {
   const [toolSelector, setToolSelector] = useState({
     pomodoro: true,
     water: false,
-    stretch: false,
+    stretch: false
   });
   const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -123,7 +54,7 @@ export default function SimpleBackdrop() {
       moodStart: wellnessScore,
       pomodoro: pomodoro,
       stretch: stretch,
-      water: water,
+      water: water
     })
       .then((data) => {
         localStorage.setItem("morningCheckinId", data.data.dailyId);
@@ -137,7 +68,12 @@ export default function SimpleBackdrop() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleToggle}>
+      <Button
+        className={classes.navButton}
+        variant="outlined"
+        color="primary"
+        onClick={handleToggle}
+      >
         Checkin
       </Button>
 

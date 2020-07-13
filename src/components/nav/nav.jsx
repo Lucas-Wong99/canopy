@@ -7,11 +7,11 @@ import Checkout from "./checkins/checkout";
 
 const useStyles = makeStyles((theme) => ({
   brandBar: {
-    height: "75px"
+    height: "85px"
   },
   brandPaper: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center"
   }
 }));
