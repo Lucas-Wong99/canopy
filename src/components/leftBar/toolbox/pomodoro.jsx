@@ -1,9 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { functions } from "../../../firebase";
 import "./pomodoro.css";
-// import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  time: {
+    fontSize: "72px",
+    fontWeight: 400,
+    color: "#272727",
+    display: "block",
+    width: "100%",
+    textAlign: "center",
+  },
+}));
 
 function Pomodoro() {
+  const classes = useStyles();
   const [currentStatus, setCurrentStatus] = useState("");
   // Stateful Timers Client Side
   const [time, setTime] = useState(1500);
@@ -14,7 +36,7 @@ function Pomodoro() {
     setCurrentStatus(status);
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
-      status
+      status,
     })
       .then((res) => {
         console.log("New Status", res);
@@ -39,7 +61,7 @@ function Pomodoro() {
     const notificationTitle = createNotificationTitle(status);
     const notification = new Notification(notificationTitle, {
       icon: "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
-      body: ""
+      body: "",
     });
     console.log(notification);
   };
@@ -94,13 +116,53 @@ function Pomodoro() {
   };
 
   return (
-    <div className="pomodoro">
+    <div className={classes.root}>
       <div className="container display timer">
-        <span className="time">{format(time)}</span>
-        <span className="timeType">The time!</span>
+        <h1 className={classes.time}> {format(time)} </h1>
+        <p>Let's track your Canopy time</p>
       </div>
 
-      <div className="container display types">
+      <ButtonGroup
+        variant="text"
+        color="primary"
+        aria-label="text primary button group"
+      >
+        <Button
+          onClick={() => {
+            addStatus("is about to start a deep work session");
+            reset(10);
+          }}
+        >
+          Deep Work
+        </Button>
+
+        <Button
+          onClick={() => {
+            addStatus("needs a social break!");
+            reset(10);
+          }}
+        >
+          Social Time
+        </Button>
+
+        <Button
+          onClick={() => {
+            addStatus("Is taking a coffee break. You should come!");
+            reset(10);
+          }}
+        >
+          Coffee Break
+        </Button>
+      </ButtonGroup>
+
+      <Button
+        // className={play ? "stop btnIcon" : "play btnIcon"}
+        onClick={toggle}
+      >
+        {play ? "Pause" : "Start"}
+      </Button>
+
+      {/* <div className="container display types">
         <button
           className="btn"
           onClick={() => {
@@ -139,7 +201,7 @@ function Pomodoro() {
             onClick={toggle}
           ></button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
