@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import Status from "./status";
 // import { Grid, Paper, Box } from "@material-ui/core";
 
+
 function StatusFeed({ setStatusCount }) {
   const [statusFeed, setStatusFeed] = useState([]);
 
