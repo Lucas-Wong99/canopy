@@ -22,7 +22,7 @@ messaging.onMessage(function (payload) {
     body: payload.notification.body
   });
   notification.onClick = function () {
-    window.open("http://localhost:3000");
+    window.open("https://canopy-1bb2b.firebaseapp.com/");
   };
 
   console.log("onMessage: ", payload);

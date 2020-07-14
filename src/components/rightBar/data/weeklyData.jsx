@@ -11,22 +11,22 @@ const useStyles = makeStyles((theme) => ({
   },
   daily: {
     // display: "flex",
-  },
+  }
 }));
 
 function WeeklyDataVis({ workWeek, coffeeWeek, socialWeek }) {
   const classes = useStyles();
 
   const weekly = {
-    labels: ["Self-care", "Heads down work", "Collaboration"],
+    labels: ["Social Breaks", "Heads Down Work", "Coffee Breaks"],
     datasets: [
       {
         label: "Rainfall",
-        backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
-        hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-        data: [socialWeek, workWeek, coffeeWeek],
-      },
-    ],
+        backgroundColor: ["#294C60", "#773344", "#FFC857"],
+        hoverBackgroundColor: ["#447c9b", "#a5495f", "#9b7933"],
+        data: [socialWeek, workWeek, coffeeWeek]
+      }
+    ]
   };
 
   return (
@@ -39,12 +39,12 @@ function WeeklyDataVis({ workWeek, coffeeWeek, socialWeek }) {
           title: {
             display: true,
             text: "Breakdown of your week",
-            fontSize: 10,
+            fontSize: 10
           },
           legend: {
             display: false,
-            position: "right",
-          },
+            position: "right"
+          }
         }}
       />
     </Grid>
