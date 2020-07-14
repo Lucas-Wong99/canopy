@@ -1,5 +1,6 @@
 import React from "react";
 import { functions } from "../../../firebase";
+import { Button } from "@material-ui/core";
 
 function WaterButton() {
   const addCup = () => {
@@ -14,9 +15,7 @@ function WaterButton() {
       });
   };
   return (
-    <div>
-      <button onClick={() => addCup()}>Drank 1 Cup of Water</button>
-    </div>
+      <Button variant="contained" color="primary" onClick={() => addCup()}>Drank 1 Cup of Water</Button>
   );
 }
 

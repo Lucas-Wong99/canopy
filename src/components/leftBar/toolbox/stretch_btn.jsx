@@ -1,5 +1,6 @@
 import React from "react";
 import { functions } from "../../../firebase";
+import { Button } from "@material-ui/core";
 
 function StretchButton() {
   const addStretch = () => {
@@ -14,9 +15,7 @@ function StretchButton() {
   };
 
   return (
-    <div>
-      <button onClick={() => addStretch()}>Took a stretch break!</button>
-    </div>
+      <Button variant="contained" color="primary" onClick={() => addStretch()}>Took a stretch break!</Button>
   );
 }
 

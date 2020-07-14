@@ -8,13 +8,16 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   avatarDisplay: {
     height: "90%",
-    zIndex: 2
+    zIndex: 2,
   },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
     height: "100%",
-    zIndex: 2
+    zIndex: 2,
+    display: "flex",
+    flexDirection: 'column',
+    justifyContent: "space-between"
   }
 }));
 
