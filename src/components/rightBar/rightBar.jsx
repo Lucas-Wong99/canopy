@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import StatusFeed from "../statusFeed";
-import DailyDataVis from "./data/dailyData";
-import WeeklyDataVis from "./data/weeklyData";
-import CheckinData from "./data/checkinData";
-import CustomizedProgressBars from "./data/waterData";
 import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../../firebase";
+import VerticalTabs from "./dataTabs";
 
 const useStyles = makeStyles((theme) => ({
   dataVis: {
@@ -32,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
   status: {
     overflow: "auto",
     height: "80%",
+  },
+  title: {
+    marginLeft: "10px",
+    font: theme.typography.fontFamily,
   },
 }));
 
@@ -118,30 +119,22 @@ export default function RightBar({ setStatusCount, user }) {
   return (
     <Grid item xs={6} className={classes.rightBar}>
       <Paper className={classes.rightPaper} elevation={5}>
-        <h4>What are your friends up to?</h4>
+        <h4 className={classes.title}>Status Feed</h4>
         <Box className={classes.status}>
           <StatusFeed setStatusCount={setStatusCount} />
         </Box>
       </Paper>
 
       <Paper className={classes.rightPaper} elevation={5}>
-        <Box className={classes.dataVis}>
-          <DailyDataVis
-            workDay={workDay}
-            socialDay={socialDay}
-            coffeeDay={coffeeDay}
-          />
-          <WeeklyDataVis
-            workWeek={workWeek}
-            socialWeek={socialWeek}
-            coffeeWeek={coffeeWeek}
-          />
-        </Box>
-        <Box className={classes.waterVis}>
-          <h4> Daily Water intake</h4>
-          <CustomizedProgressBars username={user} />
-        </Box>
-        <CheckinData username={user} />
+        <VerticalTabs
+          workDay={workDay}
+          socialDay={socialDay}
+          coffeeDay={coffeeDay}
+          workWeek={workWeek}
+          socialWeek={socialWeek}
+          coffeeWeek={coffeeWeek}
+          username={user}
+        />
       </Paper>
     </Grid>
   );

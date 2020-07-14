@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { db } from "../../../firebase";
-import { getByPlaceholderText } from "@testing-library/react";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: "50px",
     borderRadius: 5,
     display: "flex",
-    justifyContent: "center",
+    // justifyContent: "center",
     width: "450px",
   },
   bar: {
     borderRadius: 5,
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-    // height: "50px",
-    // display: "flex",
-    // justifyContent: "center",
   },
 }))(LinearProgress);
 
@@ -27,7 +23,7 @@ const useStyles = makeStyles({
     // flexGrow: 1,
   },
 });
-const MAX = 8;
+const MAX = 5;
 const MIN = 0;
 function normalize(value) {
   let cups = ((value - MIN) * 100) / (MAX - MIN);
@@ -38,38 +34,42 @@ function normalize(value) {
   }
 }
 
-function WaterBar({ username }) {
+function StretchBar({ username }) {
   const classes = useStyles();
-  const [water, setWater] = useState();
+  const [stretch, setStretch] = useState(0);
 
   useEffect(() => {
     return db
-      .collection("Water")
+      .collection("Stretch")
       .where("user_name", "==", username)
       .onSnapshot((snapshot) => {
-        const waterArr = [];
+        const stretchArr = [];
         snapshot.forEach((doc) => {
           const now = new Date();
           const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
           if (doc.data().date_created.seconds >= lastMidnight) {
-            waterArr.push(doc.data());
+            stretchArr.push(doc.data());
           }
         });
-        setWater(waterArr.length);
+        setStretch(stretchArr.length);
       });
   }, [username]);
+
   return (
     <Box className={classes.root} display="flex" alignItems="center">
       <Box>
-        <BorderLinearProgress variant="determinate" value={normalize(water)} />
+        <BorderLinearProgress
+          variant="determinate"
+          value={normalize(stretch)}
+        />
       </Box>
       <Box margin={1}>
         <Typography variant="body2" color="textSecondary">
-          {water}/8
+          {stretch}/8
         </Typography>
       </Box>
     </Box>
   );
 }
 
-export default WaterBar;
+export default StretchBar;
