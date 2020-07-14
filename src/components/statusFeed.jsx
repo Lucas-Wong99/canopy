@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Status from "./status";
-// import { Grid, Paper, Box } from "@material-ui/core";
-
+import { Grid, Paper, Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 function StatusFeed({ setStatusCount }) {
   const [statusFeed, setStatusFeed] = useState([]);
@@ -20,7 +20,7 @@ function StatusFeed({ setStatusCount }) {
             status: doc.data().status,
             date_created: doc.data().date_created,
             user_name: doc.data().user_name,
-            claps: doc.data().claps
+            claps: doc.data().claps,
           })
         );
         setStatusFeed(statusData);
@@ -40,12 +40,7 @@ function StatusFeed({ setStatusCount }) {
       />
     );
   });
-  return (
-    <div>
-      <h4>Status</h4>
-      {statusArr.reverse()}
-    </div>
-  );
+  return <div>{statusArr.reverse()}</div>;
 }
 
 export default StatusFeed;

@@ -8,31 +8,31 @@ import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../../firebase";
 
-
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   rightPaper: {
-    height: "48%"
+    height: "48%",
+    padding: "10px",
   },
   rightBar: {
     height: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   status: {
     overflow: "auto",
-    height: "100%"
-  }
+    height: "80%",
+  },
 }));
 
 export default function RightBar({ setStatusCount, user }) {
@@ -118,6 +118,7 @@ export default function RightBar({ setStatusCount, user }) {
   return (
     <Grid item xs={6} className={classes.rightBar}>
       <Paper className={classes.rightPaper} elevation={5}>
+        <h4>What are your friends up to?</h4>
         <Box className={classes.status}>
           <StatusFeed setStatusCount={setStatusCount} />
         </Box>
@@ -137,7 +138,7 @@ export default function RightBar({ setStatusCount, user }) {
           />
         </Box>
         <Box className={classes.waterVis}>
-          <h1> Daily Water intake</h1>
+          <h4> Daily Water intake</h4>
           <CustomizedProgressBars username={user} />
         </Box>
         <CheckinData username={user} />
