@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rightPaper: {
     height: "48%",
-    padding: "10px",
+    // padding: "10px",
   },
   rightBar: {
     height: "90%",
