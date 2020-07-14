@@ -9,15 +9,14 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   avatarDisplay: {
     height: "90%",
-    zIndex: 2
+    zIndex: 2,
   },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
     height: "100%",
-    zIndex: 2
+    zIndex: 2,
   },
-  
 }));
 
 export default function LeftBar({ statusCount, user }) {
@@ -26,13 +25,13 @@ export default function LeftBar({ statusCount, user }) {
   return (
     <Grid item xs={6} className={classes.avatarDisplay}>
       <Paper className={classes.paper} elevation={5}>
-        <AvatarDisplay currentUser={user} className={classes.avatarDisplay}/>
+        <AvatarDisplay currentUser={user} className={classes.avatarDisplay} />
 
-        <CreateStatus className={classes.avatarDisplay}/>
+        {/* <CreateStatus className={classes.avatarDisplay}/> */}
 
         <Vines className={classes.vines} statusCount={statusCount} />
 
-        <Toolbox className={classes.avatarDisplay}/>
+        <Toolbox className={classes.avatarDisplay} />
       </Paper>
     </Grid>
   );
