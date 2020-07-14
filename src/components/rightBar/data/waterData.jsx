@@ -10,21 +10,21 @@ const BorderLinearProgress = withStyles((theme) => ({
     borderRadius: 5,
     display: "flex",
     justifyContent: "center",
-    width: "450px"
+    width: "450px",
   },
   bar: {
     borderRadius: 5,
-    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)"
+    background: "linear-gradient(45deg, #B8D1E0 30%, #294C60 90%)",
     // height: "50px",
     // display: "flex",
     // justifyContent: "center",
-  }
+  },
 }))(LinearProgress);
 
 const useStyles = makeStyles({
   root: {
     // flexGrow: 1,
-  }
+  },
 });
 const MAX = 8;
 const MIN = 0;
