@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StatusFeed from "../statusFeed";
-import { Grid, Paper, Box } from "@material-ui/core";
+import { Grid, Paper, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../../firebase";
 import VerticalTabs from "./dataTabs";

@@ -59,6 +59,7 @@ function User({ name, photoURL, current_status, token }) {
 
   const useStyles = makeStyles((theme) => ({
     root: {
+      marginLeft: "10px",
       display: "flex",
       "& > *": {
         margin: theme.spacing(1),
