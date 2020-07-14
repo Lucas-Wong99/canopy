@@ -12,7 +12,7 @@ const DiscreteSlider = function ({ setWellnessScore, time }) {
 
   return (
     <div className={classes.slider}>
-      <Typography id="discrete-slider-always">
+      <Typography component={"span"} id="discrete-slider-always">
         How would you rate your wellness {time} today?
       </Typography>
       <Slider

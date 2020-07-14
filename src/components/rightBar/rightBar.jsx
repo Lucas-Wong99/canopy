@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StatusFeed from "../statusFeed";
-import { Grid, Paper, Box, Typography } from "@material-ui/core";
+import { Grid, Paper, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../../firebase";
 import VerticalTabs from "./dataTabs";
@@ -8,32 +8,32 @@ import VerticalTabs from "./dataTabs";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   rightPaper: {
-    height: "48%",
+    height: "48%"
     // padding: "10px",
   },
   rightBar: {
     height: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   status: {
     overflow: "auto",
-    height: "80%",
+    height: "80%"
   },
   title: {
     marginLeft: "10px",
-    font: theme.typography.fontFamily,
-  },
+    font: theme.typography.fontFamily
+  }
 }));
 
 export default function RightBar({ setStatusCount, user }) {

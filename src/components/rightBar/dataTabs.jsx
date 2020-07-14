@@ -24,7 +24,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -34,13 +34,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`
   };
 }
 
@@ -49,23 +49,23 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    font: theme.typography.fontFamily,
+    font: theme.typography.fontFamily
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
-    height: "100%",
+    height: "100%"
   },
   title: {
-    margin: 0,
+    margin: 0
   },
   trackers: {
-    margin: "50px",
+    margin: "50px"
   },
   trends: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 }));
 
 export default function VerticalTabs({
@@ -75,7 +75,7 @@ export default function VerticalTabs({
   username,
   workWeek,
   socialWeek,
-  coffeeWeek,
+  coffeeWeek
 }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);

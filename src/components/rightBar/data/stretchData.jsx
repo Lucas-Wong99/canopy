@@ -10,18 +10,18 @@ const BorderLinearProgress = withStyles((theme) => ({
     borderRadius: 5,
     display: "flex",
     // justifyContent: "center",
-    width: "450px",
+    width: "450px"
   },
   bar: {
     borderRadius: 5,
-    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-  },
+    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)"
+  }
 }))(LinearProgress);
 
 const useStyles = makeStyles({
   root: {
     // flexGrow: 1,
-  },
+  }
 });
 const MAX = 5;
 const MIN = 0;
@@ -64,7 +64,7 @@ function StretchBar({ username }) {
         />
       </Box>
       <Box margin={1}>
-        <Typography variant="body2" color="textSecondary">
+        <Typography component={"span"} variant="body2" color="textSecondary">
           {stretch}/8
         </Typography>
       </Box>

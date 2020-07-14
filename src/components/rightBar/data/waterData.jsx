@@ -3,7 +3,6 @@ import { Typography, Box } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { db } from "../../../firebase";
-import { getByPlaceholderText } from "@testing-library/react";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -11,21 +10,21 @@ const BorderLinearProgress = withStyles((theme) => ({
     borderRadius: 5,
     display: "flex",
     justifyContent: "center",
-    width: "450px",
+    width: "450px"
   },
   bar: {
     borderRadius: 5,
-    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)"
     // height: "50px",
     // display: "flex",
     // justifyContent: "center",
-  },
+  }
 }))(LinearProgress);
 
 const useStyles = makeStyles({
   root: {
     // flexGrow: 1,
-  },
+  }
 });
 const MAX = 8;
 const MIN = 0;
@@ -64,7 +63,7 @@ function WaterBar({ username }) {
         <BorderLinearProgress variant="determinate" value={normalize(water)} />
       </Box>
       <Box margin={1}>
-        <Typography variant="body2" color="textSecondary">
+        <Typography component={"span"} variant="body2" color="textSecondary">
           {water}/8
         </Typography>
       </Box>
