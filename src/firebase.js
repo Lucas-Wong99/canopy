@@ -18,7 +18,7 @@ const messaging = firebaseApp.messaging();
 
 messaging.onMessage(function (payload) {
   const notification = new Notification(payload.notification.title, {
-    icon: "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
+    icon: "canopyIcon512.png",
     body: payload.notification.body
   });
   notification.onClick = function () {
