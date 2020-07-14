@@ -3,7 +3,7 @@ import { db } from "../../firebase";
 import User from "../users";
 import { Grid } from "@material-ui/core";
 
-function Avatar_Display() {
+function Avatar_Display({ currentUser }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -12,18 +12,30 @@ function Avatar_Display() {
       .orderBy("name")
       .onSnapshot((snapshot) => {
         const userData = [];
-        snapshot.forEach((doc) =>
-          userData.push({
-            id: doc.id,
-            name: doc.data().name,
-            photoURL: doc.data().photoURL,
-            current_status: doc.data().current_status,
-            token: doc.data().deviceToken
-          })
-        );
-        setUsers(userData);
+        const currentUserData = [];
+        snapshot.forEach((doc) => {
+          if (doc.data().name === currentUser) {
+            currentUserData.push({
+              id: doc.id,
+              name: doc.data().name,
+              photoURL: doc.data().photoURL,
+              current_status: doc.data().current_status,
+              token: doc.data().deviceToken
+            });
+          } else {
+            userData.push({
+              id: doc.id,
+              name: doc.data().name,
+              photoURL: doc.data().photoURL,
+              current_status: doc.data().current_status,
+              token: doc.data().deviceToken
+            });
+          }
+        });
+        const order = [...currentUserData, ...userData];
+        setUsers(order);
       });
-  }, []);
+  }, [currentUser]);
 
   const usersArr = users.map((user) => {
     return (

@@ -46,7 +46,7 @@ function Dashboard() {
         {" "}
         {/*this holds all the page, and is the gradient background, holds the grid items*/}
         <Nav user={user} />
-        <LeftBar statusCount={statusCount} />
+        <LeftBar statusCount={statusCount} user={user} />
         <RightBar setStatusCount={setStatusCount} user={user} />
       </Grid>
     </div>

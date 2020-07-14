@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LeftBar({ statusCount }) {
+export default function LeftBar({ statusCount, user }) {
   const classes = useStyles();
 
   return (
     <Grid item xs={6} className={classes.avatarDisplay}>
       <Paper className={classes.paper} elevation={5}>
-        <AvatarDisplay />
+        <AvatarDisplay currentUser={user} />
 
         <Vines className={classes.vines} statusCount={statusCount} />
 
