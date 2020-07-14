@@ -3,15 +3,21 @@ import { Bar } from "react-chartjs-2";
 import { db } from "../../../firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
+// import {
+//   data,
+//   options,
+//   useStyles,
+//   plugins,
+// } from "../../../hooks/checkin/weeklyTrendGraph";
 
 const useStyles = makeStyles((theme) => ({
   moodTrend: {
     width: "600px",
-    height: "300px"
+    height: "300px",
   },
   title: {
-    margin: 0
-  }
+    margin: 0,
+  },
 }));
 
 function CheckinData({ username }) {
@@ -28,28 +34,36 @@ function CheckinData({ username }) {
       return "Thursday";
     } else if (day === 5) {
       return "Friday";
+    } else if (day === 6) {
+      return "Saturday";
+    } else if (day === 0) {
+      return "Sunday";
     } else {
       return "No Data";
     }
   }
   const [today, setToday] = useState({});
-  const [monday, setMonday] = useState({});
-  const [tuesday, setTuesday] = useState({});
-  const [wednesday, setWednesday] = useState({});
-  const [thursday, setThursday] = useState({});
-  const [friday, setFriday] = useState({});
+  const [seven, setSeven] = useState({});
+  const [six, setSix] = useState({});
+  const [five, setFive] = useState({});
+  const [four, setFour] = useState({});
+  const [three, setThree] = useState({});
+  const [two, setTwo] = useState({});
+  const [one, setOne] = useState({});
   const data = {
     datasets: [
       {
         label: "Wellness Score Change",
         type: "line",
         data: [
-          monday.moodEnd - monday.moodStart,
-          tuesday.moodEnd - tuesday.moodStart,
-          wednesday.moodEnd - wednesday.moodStart,
-          thursday.moodEnd - thursday.moodStart,
-          friday.moodEnd - friday.moodStart,
-          today.moodEnd - today.moodStart
+          seven.moodEnd - seven.moodStart,
+          six.moodEnd - six.moodStart,
+          five.moodEnd - five.moodStart,
+          four.moodEnd - four.moodStart,
+          three.moodEnd - three.moodStart,
+          two.moodEnd - two.moodStart,
+          one.moodEnd - one.moodStart,
+          today.moodEnd - today.moodStart,
         ],
         fill: false,
         borderColor: "#7CA982",
@@ -58,18 +72,20 @@ function CheckinData({ username }) {
         pointBackgroundColor: "#7CA982",
         pointHoverBackgroundColor: "#7CA982",
         pointHoverBorderColor: "#7CA982",
-        yAxisID: "y-axis-1"
+        yAxisID: "y-axis-1",
       },
       {
         label: "Wellness Score Start",
         type: "line",
         data: [
-          monday.moodStart,
-          tuesday.moodStart,
-          wednesday.moodStart,
-          thursday.moodStart,
-          friday.moodStart,
-          today.moodStart
+          seven.moodStart,
+          six.moodStart,
+          five.moodStart,
+          four.moodStart,
+          three.moodStart,
+          two.moodStart,
+          one.moodStart,
+          today.moodStart,
         ],
         fill: false,
         // borderColor: "#EC932F",
@@ -78,18 +94,20 @@ function CheckinData({ username }) {
         // pointBackgroundColor: "#EC932F",
         // pointHoverBackgroundColor: "#EC932F",
         // pointHoverBorderColor: "#EC932F",
-        yAxisID: "y-axis-1"
+        yAxisID: "y-axis-1",
       },
       {
         label: "Wellness Score End",
         type: "line",
         data: [
-          monday.moodEnd,
-          tuesday.moodEnd,
-          wednesday.moodEnd,
-          thursday.moodEnd,
-          friday.moodEnd,
-          today.moodEnd
+          seven.moodEnd,
+          six.moodEnd,
+          five.moodEnd,
+          four.moodEnd,
+          three.moodEnd,
+          two.moodEnd,
+          one.moodEnd,
+          today.moodEnd,
         ],
         fill: false,
         // borderColor: "#EC932F",
@@ -98,70 +116,39 @@ function CheckinData({ username }) {
         // pointBackgroundColor: "#2f71a9",
         // pointHoverBackgroundColor: "#2f71a9",
         // pointHoverBorderColor: "#2f71a9",
-        yAxisID: "y-axis-1"
-      }
-      // {
-      //   label: "Stretch",
-      //   type: "bar",
-      //   data: ["false", 1, -1, -1, -1],
-      //   fill: false,
-      //   backgroundColor: "#71B37C",
-      //   borderColor: "#71B37C",
-      //   hoverBackgroundColor: "#71B37C",
-      //   hoverBorderColor: "#71B37C",
-      //   yAxisID: "y-axis-1",
-      // },
-      // {
-      //   label: "Pomodoro",
-      //   type: "bar",
-      //   data: [1, 1, 1, -1, 1],
-      //   fill: false,
-      //   backgroundColor: "#71B37C",
-      //   borderColor: "#71B37C",
-      //   hoverBackgroundColor: "#71B37C",
-      //   hoverBorderColor: "#71B37C",
-      //   yAxisID: "y-axis-1",
-      // },
-      // {
-      //   label: "Water",
-      //   type: "bar",
-      //   data: [1, -1, 1, -1, 1],
-      //   fill: false,
-      //   backgroundColor: "#71B37C",
-      //   borderColor: "#71B37C",
-      //   hoverBackgroundColor: "#71B37C",
-      //   hoverBorderColor: "#71B37C",
-      //   yAxisID: "y-axis-1",
-      // },
-    ]
+        yAxisID: "y-axis-1",
+      },
+    ],
   };
 
   const options = {
     responsive: true,
     tooltips: {
-      mode: "label"
+      mode: "label",
     },
     elements: {
       line: {
-        fill: false
-      }
+        fill: false,
+      },
     },
     scales: {
       xAxes: [
         {
           display: true,
           gridLines: {
-            display: false
+            display: false,
           },
           labels: [
-            dateConv(monday.date),
-            dateConv(tuesday.date),
-            dateConv(wednesday.date),
-            dateConv(thursday.date),
-            dateConv(friday.date),
-            "Today"
-          ]
-        }
+            dateConv(seven.date),
+            dateConv(six.date),
+            dateConv(five.date),
+            dateConv(four.date),
+            dateConv(three.date),
+            dateConv(two.date),
+            dateConv(one.date),
+            "Today",
+          ],
+        },
       ],
       yAxes: [
         {
@@ -170,26 +157,14 @@ function CheckinData({ username }) {
           position: "left",
           id: "y-axis-1",
           gridLines: {
-            display: false
+            display: false,
           },
           labels: {
-            show: true
-          }
-        }
-        // {
-        //   type: "linear",
-        //   display: true,
-        //   position: "right",
-        //   id: "y-axis-2",
-        //   gridLines: {
-        //     display: false,
-        //   },
-        //   labels: {
-        //     show: true,
-        //   },
-        // },
-      ]
-    }
+            show: true,
+          },
+        },
+      ],
+    },
   };
 
   const plugins = [
@@ -197,8 +172,8 @@ function CheckinData({ username }) {
       afterDraw: (chartInstance, easing) => {
         const ctx = chartInstance.chart.ctx;
         ctx.fillText("", 150, 100);
-      }
-    }
+      },
+    },
   ];
   const classes = useStyles();
   useEffect(() => {
@@ -216,52 +191,70 @@ function CheckinData({ username }) {
             doc.data().date_created.seconds > lastWeek &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay
           ) {
-            setMonday({
+            setSeven({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay * 2
           ) {
-            setTuesday({
+            setSix({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 2 &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay * 3
           ) {
-            setWednesday({
+            setFive({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 3 &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay * 4
           ) {
-            setThursday({
+            setFour({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
             });
           } else if (
             doc.data().date_created.seconds > lastWeek + secondsInADay * 4 &&
             doc.data().date_created.seconds <= lastWeek + secondsInADay * 5
           ) {
-            setFriday({
+            setThree({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay * 5 &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay * 6
+          ) {
+            setTwo({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
+            });
+          } else if (
+            doc.data().date_created.seconds > lastWeek + secondsInADay * 6 &&
+            doc.data().date_created.seconds <= lastWeek + secondsInADay * 7
+          ) {
+            setOne({
+              moodStart: doc.data().moodStart,
+              moodEnd: doc.data().moodEnd,
+              date: doc.data().date_created.seconds,
             });
           } else if (doc.data().date_created.seconds > lastMidnight) {
             setToday({
               moodStart: doc.data().moodStart,
               moodEnd: doc.data().moodEnd,
-              date: doc.data().date_created.seconds
+              date: doc.data().date_created.seconds,
             });
           }
         });

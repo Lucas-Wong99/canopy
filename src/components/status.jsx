@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "5px",
     justifyContent: "space-between",
     alignItems: "center",
+    overflow: "hidden",
   },
   status: {
     display: "flex",
