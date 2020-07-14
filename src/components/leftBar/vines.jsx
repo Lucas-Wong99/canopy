@@ -1,58 +1,71 @@
 import React, { useRef, useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+  canvas: {
+    position: "absolute",
+    top: "25%",
+    right: "55%",
+    zIndex: 0
+  }
+}));
+
 
 function Vines({ statusCount }) {
+  const classes = useStyles();
   const [state, setState] = useState({
     lattice: [
       //vertical lattice
       [
+        { x: 100, y: 100 },
+        { x: 100, y: 500 }
+      ],
+      [
         { x: 200, y: 100 },
-        { x: 200, y: 700 }
+        { x: 200, y: 500 }
       ],
       [
         { x: 300, y: 100 },
-        { x: 300, y: 700 }
+        { x: 300, y: 500 }
       ],
       [
         { x: 400, y: 100 },
-        { x: 400, y: 700 }
+        { x: 400, y: 500 }
       ],
       [
         { x: 500, y: 100 },
-        { x: 500, y: 700 }
+        { x: 500, y: 500 }
       ],
       [
         { x: 600, y: 100 },
-        { x: 600, y: 700 }
-      ],
-      //horizontal lattice
-      [
-        { x: 200, y: 100 },
-        { x: 600, y: 100 }
-      ],
-      [
-        { x: 200, y: 200 },
-        { x: 600, y: 200 }
-      ],
-      [
-        { x: 200, y: 300 },
-        { x: 600, y: 300 }
-      ],
-      [
-        { x: 200, y: 400 },
-        { x: 600, y: 400 }
-      ],
-      [
-        { x: 200, y: 500 },
         { x: 600, y: 500 }
       ],
       [
-        { x: 200, y: 600 },
-        { x: 600, y: 600 }
+        { x: 700, y: 100 },
+        { x: 700, y: 500 }
+      ],
+      //horizontal lattice
+      [
+        { x: 100, y: 100 },
+        { x: 700, y: 100 }
       ],
       [
-        { x: 200, y: 700 },
-        { x: 600, y: 700 }
+        { x: 100, y: 200 },
+        { x: 700, y: 200 }
       ],
+      [
+        { x: 100, y: 300 },
+        { x: 700, y: 300 }
+      ],
+      [
+        { x: 100, y: 400 },
+        { x: 700, y: 400 }
+      ],
+      [
+        { x: 100, y: 500 },
+        { x: 700, y: 500 }
+      ]
     ],
     branches: [
       {
@@ -288,7 +301,7 @@ function Vines({ statusCount }) {
     // Draw lattice
     context.lineWidth = 0.5;
 //    context.strokeStyle = "rgb(213, 213, 213)";
-    context.strokeStyle = "rgb(213, 0, 0)";
+    context.strokeStyle = "rgb(250, 250, 250)";
 
     state.lattice.forEach((lattice) => {
       context.beginPath();
@@ -314,10 +327,10 @@ function Vines({ statusCount }) {
   }, [state.interations]);
 
   return (
-    <div>
-      <canvas ref={canvasEl} height="800" width="800" />
-      <button onClick={() => setState(prev => ({...prev, interations: prev.interations + 1 }))}>Increment</button>
-    </div>
+    
+  <canvas className={classes.canvas} ref={canvasEl} height="600" width="800"/>
+    
+    
   );
 }
 

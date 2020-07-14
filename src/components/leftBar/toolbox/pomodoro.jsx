@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& > *": {
       margin: theme.spacing(1),
+      zIndex: 2
     },
   },
   time: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "100%",
     textAlign: "center",
+    zIndex: 2
   },
 }));
 
