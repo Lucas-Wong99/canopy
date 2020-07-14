@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
       zIndex: 2
-    },
+    }
   },
   time: {
     fontSize: "72px",
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
     zIndex: 2
-  },
+  }
 }));
 
 function Pomodoro() {
@@ -37,7 +37,7 @@ function Pomodoro() {
     setCurrentStatus(status);
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
-      status,
+      status
     })
       .then((res) => {
         console.log("New Status", res);
@@ -61,8 +61,8 @@ function Pomodoro() {
   const timerNotification = (status) => {
     const notificationTitle = createNotificationTitle(status);
     const notification = new Notification(notificationTitle, {
-      icon: "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
-      body: "",
+      icon: "canopyIcon512.png",
+      body: ""
     });
     console.log(notification);
   };
@@ -146,12 +146,13 @@ function Pomodoro() {
         </Button>
 
         <Button
-          onClick=
-          {() => {
-            addStatus("Is taking a coffee break. You should come!");
+          onClick={() => {
+            addStatus("is taking a coffee break. You should come!");
             reset(10);
           }}
-          > Coffee Break
+        >
+          {" "}
+          Coffee Break
         </Button>
       </ButtonGroup>
 
