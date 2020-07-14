@@ -1,26 +1,32 @@
 import React, { useEffect } from "react";
 import Dashboard from "./dashboard/dashboard";
-import { Container } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 import { messaging, functions } from "../firebase";
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    background: "linear-gradient(45deg, #7CA982 30%, #0D4439 90%)",
+  },
+}));
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#acdbb2',
-      main: '#7ca982',
-      dark: '#4f7a55',
-      contrastText: '#000000',
+      light: "#acdbb2",
+      main: "#7ca982",
+      dark: "#4f7a55",
+      contrastText: "#000000",
     },
     secondary: {
-      light: '#4c685f',
-      main: '#243e36',
-      dark: '#00180f',
-      contrastText: '#ffffff',
+      light: "#4c685f",
+      main: "#243e36",
+      dark: "#00180f",
+      contrastText: "#ffffff",
     },
   },
   typography: {
-    fontFamily: "'Montserrat', sans-serif"
+    fontFamily: "'Montserrat', sans-serif",
   },
   spacing: 8,
 
@@ -36,16 +42,17 @@ const theme = createMuiTheme({
   //density:
   //z-index
   //overrides
-
 });
 
 function App() {
+  const classes = useStyles();
+
   const sendToken = (token) => {
     const sendTokenToFirestore = functions.httpsCallable(
       "sendTokenToFirestore"
     );
     sendTokenToFirestore({
-      token
+      token,
     })
       .then((res) => {
         console.log(res);
@@ -63,7 +70,6 @@ function App() {
         console.log("TOKEN", token);
         sendToken(token);
       })
-
       .catch(function (err) {
         console.log("Unable to get permission to notify.", err);
       });
@@ -74,7 +80,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth={false}>
+      <Container className={classes.container} maxWidth={"fill"}>
         <Dashboard />
       </Container>
     </ThemeProvider>

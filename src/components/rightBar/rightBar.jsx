@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   rightPaper: {
-    height: "48%",
+    height: "49%",
     font: theme.typography.fontFamily,
     // padding: "10px",
   },
@@ -127,8 +127,8 @@ export default function RightBar({ setStatusCount, user }) {
   return (
     <Grid item xs={6} className={classes.rightBar}>
       <Paper className={classes.rightPaper} elevation={5}>
-        <Typography className={classes.title}>
-          <h4 className={classes.title}>Status Feed</h4>
+        <Typography component={"span"} className={classes.title}>
+          Status Feed
         </Typography>
         <Box className={classes.status}>
           <StatusFeed setStatusCount={setStatusCount} />
