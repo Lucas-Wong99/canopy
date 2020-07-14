@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StatusFeed from "../statusFeed";
-import { Grid, Paper, Box } from "@material-ui/core";
+import { Grid, Paper, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../../firebase";
 import VerticalTabs from "./dataTabs";
@@ -8,32 +8,39 @@ import VerticalTabs from "./dataTabs";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   rightPaper: {
-    height: "48%"
+    height: "48%",
+    font: theme.typography.fontFamily,
     // padding: "10px",
   },
   rightBar: {
     height: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    font: theme.typography.fontFamily,
+    width: "854px",
   },
   status: {
     overflow: "auto",
-    height: "80%"
+    height: "80%",
   },
   title: {
     marginLeft: "10px",
-    font: theme.typography.fontFamily
-  }
+    marginBottom: "0px",
+    marginTop: "10px",
+  },
+  vertTab: {
+    borderRadius: "25px",
+  },
 }));
 
 export default function RightBar({ setStatusCount, user }) {
@@ -51,75 +58,77 @@ export default function RightBar({ setStatusCount, user }) {
 
   // A further refactor will split this useEffect into a function that takes a sort param (daily or weekly)
   // and the snapshot array
-  useEffect(() => {
-    if (user) {
-      return db
-        .collection("Status")
-        .where("user_name", "==", user)
-        .onSnapshot((snapshot) => {
-          const socialDayArr = [];
-          const coffeeDayArr = [];
-          const workDayArr = [];
-          const socialWeekArr = [];
-          const coffeeWeekArr = [];
-          const workWeekArr = [];
-          snapshot.forEach((doc) => {
-            const now = new Date();
-            const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
-            const secondsInADay = 86400;
-            const secondsInAWeek = secondsInADay * 7;
-            const lastWeek = lastMidnight - secondsInAWeek;
-            if (
-              doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "needs a social break!"
-            ) {
-              socialDayArr.push(doc.data());
-            }
-            if (
-              doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "Is taking a coffee break. You should come!"
-            ) {
-              coffeeDayArr.push(doc.data());
-            }
-            if (
-              doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "is about to start a deep work session"
-            ) {
-              workDayArr.push(doc.data());
-            }
-            if (
-              doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "needs a social break!"
-            ) {
-              socialWeekArr.push(doc.data());
-            }
-            if (
-              doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "Is taking a coffee break. You should come!"
-            ) {
-              coffeeWeekArr.push(doc.data());
-            }
-            if (
-              doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "is about to start a deep work session"
-            ) {
-              workWeekArr.push(doc.data());
-            }
-          });
-          setSocialDay(socialDayArr.length);
-          setWorkDay(workDayArr.length);
-          setCoffeeDay(coffeeDayArr.length);
-          setSocialWeek(socialWeekArr.length);
-          setWorkWeek(workWeekArr.length);
-          setCoffeeWeek(coffeeWeekArr.length);
-        });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     return db
+  //       .collection("Status")
+  //       .where("user_name", "==", user)
+  //       .onSnapshot((snapshot) => {
+  //         const socialDayArr = [];
+  //         const coffeeDayArr = [];
+  //         const workDayArr = [];
+  //         const socialWeekArr = [];
+  //         const coffeeWeekArr = [];
+  //         const workWeekArr = [];
+  //         snapshot.forEach((doc) => {
+  //           const now = new Date();
+  //           const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
+  //           const secondsInADay = 86400;
+  //           const secondsInAWeek = secondsInADay * 7;
+  //           const lastWeek = lastMidnight - secondsInAWeek;
+  //           if (
+  //             doc.data().date_created.seconds > lastMidnight &&
+  //             doc.data().status === "needs a social break!"
+  //           ) {
+  //             socialDayArr.push(doc.data());
+  //           }
+  //           if (
+  //             doc.data().date_created.seconds > lastMidnight &&
+  //             doc.data().status === "Is taking a coffee break. You should come!"
+  //           ) {
+  //             coffeeDayArr.push(doc.data());
+  //           }
+  //           if (
+  //             doc.data().date_created.seconds > lastMidnight &&
+  //             doc.data().status === "is about to start a deep work session"
+  //           ) {
+  //             workDayArr.push(doc.data());
+  //           }
+  //           if (
+  //             doc.data().date_created.seconds > lastWeek &&
+  //             doc.data().status === "needs a social break!"
+  //           ) {
+  //             socialWeekArr.push(doc.data());
+  //           }
+  //           if (
+  //             doc.data().date_created.seconds > lastWeek &&
+  //             doc.data().status === "Is taking a coffee break. You should come!"
+  //           ) {
+  //             coffeeWeekArr.push(doc.data());
+  //           }
+  //           if (
+  //             doc.data().date_created.seconds > lastWeek &&
+  //             doc.data().status === "is about to start a deep work session"
+  //           ) {
+  //             workWeekArr.push(doc.data());
+  //           }
+  //         });
+  //         setSocialDay(socialDayArr.length);
+  //         setWorkDay(workDayArr.length);
+  //         setCoffeeDay(coffeeDayArr.length);
+  //         setSocialWeek(socialWeekArr.length);
+  //         setWorkWeek(workWeekArr.length);
+  //         setCoffeeWeek(coffeeWeekArr.length);
+  //       });
+  //   }
+  // }, [user]);
 
   return (
     <Grid item xs={6} className={classes.rightBar}>
       <Paper className={classes.rightPaper} elevation={5}>
-        <h4 className={classes.title}>Status Feed</h4>
+        <Typography className={classes.title}>
+          <h4 className={classes.title}>Status Feed</h4>
+        </Typography>
         <Box className={classes.status}>
           <StatusFeed setStatusCount={setStatusCount} />
         </Box>

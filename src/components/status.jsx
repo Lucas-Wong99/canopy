@@ -8,26 +8,31 @@ import ClapButton from "react-clap-button";
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: "10px",
+    paddingBottom: "5px",
     justifyContent: "space-between",
     alignItems: "center",
   },
   status: {
     display: "flex",
-    padding: "10px",
+    margin: "10px",
     alignItems: "center",
     font: theme.typography,
   },
   username: {
     fontWeight: "bold",
     font: theme.typography,
+    border: "10px",
   },
   moment: {
     fontSize: "10px",
     fontStyle: "italic",
   },
   clap: {
-    width: "50px",
-    height: "50px",
+    display: "flex",
+    marginTop: "15px",
+    marginRight: "40px",
+    alignItems: "center",
+    font: theme.typography,
   },
 }));
 
@@ -47,7 +52,7 @@ function Status({ id, date_created, user_name, status, claps }) {
   };
 
   return (
-    <Grid container margin="small" className={classes.root}>
+    <Grid container margin="medium" className={classes.root}>
       <Grid item className={classes.status}>
         <Box border={{ size: "small", color: "black" }}>
           <div>
@@ -58,7 +63,7 @@ function Status({ id, date_created, user_name, status, claps }) {
           </span>
         </Box>
       </Grid>
-      <Grid item className={classes.status}>
+      <Grid item className={classes.clap}>
         <ClapButton
           size={10}
           countTotal={claps}
