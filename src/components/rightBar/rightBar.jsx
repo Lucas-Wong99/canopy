@@ -58,70 +58,71 @@ export default function RightBar({ setStatusCount, user }) {
 
   // A further refactor will split this useEffect into a function that takes a sort param (daily or weekly)
   // and the snapshot array
-  // useEffect(() => {
-  //   if (user) {
-  //     return db
-  //       .collection("Status")
-  //       .where("user_name", "==", user)
-  //       .onSnapshot((snapshot) => {
-  //         const socialDayArr = [];
-  //         const coffeeDayArr = [];
-  //         const workDayArr = [];
-  //         const socialWeekArr = [];
-  //         const coffeeWeekArr = [];
-  //         const workWeekArr = [];
-  //         snapshot.forEach((doc) => {
-  //           const now = new Date();
-  //           const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
-  //           const secondsInADay = 86400;
-  //           const secondsInAWeek = secondsInADay * 7;
-  //           const lastWeek = lastMidnight - secondsInAWeek;
-  //           if (
-  //             doc.data().date_created.seconds > lastMidnight &&
-  //             doc.data().status === "needs a social break!"
-  //           ) {
-  //             socialDayArr.push(doc.data());
-  //           }
-  //           if (
-  //             doc.data().date_created.seconds > lastMidnight &&
-  //             doc.data().status === "Is taking a coffee break. You should come!"
-  //           ) {
-  //             coffeeDayArr.push(doc.data());
-  //           }
-  //           if (
-  //             doc.data().date_created.seconds > lastMidnight &&
-  //             doc.data().status === "is about to start a deep work session"
-  //           ) {
-  //             workDayArr.push(doc.data());
-  //           }
-  //           if (
-  //             doc.data().date_created.seconds > lastWeek &&
-  //             doc.data().status === "needs a social break!"
-  //           ) {
-  //             socialWeekArr.push(doc.data());
-  //           }
-  //           if (
-  //             doc.data().date_created.seconds > lastWeek &&
-  //             doc.data().status === "Is taking a coffee break. You should come!"
-  //           ) {
-  //             coffeeWeekArr.push(doc.data());
-  //           }
-  //           if (
-  //             doc.data().date_created.seconds > lastWeek &&
-  //             doc.data().status === "is about to start a deep work session"
-  //           ) {
-  //             workWeekArr.push(doc.data());
-  //           }
-  //         });
-  //         setSocialDay(socialDayArr.length);
-  //         setWorkDay(workDayArr.length);
-  //         setCoffeeDay(coffeeDayArr.length);
-  //         setSocialWeek(socialWeekArr.length);
-  //         setWorkWeek(workWeekArr.length);
-  //         setCoffeeWeek(coffeeWeekArr.length);
-  //       });
-  //   }
-  // }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      return db
+        .collection("Status")
+        .where("user_name", "==", user)
+        .onSnapshot((snapshot) => {
+          const socialDayArr = [];
+          const coffeeDayArr = [];
+          const workDayArr = [];
+          const socialWeekArr = [];
+          const coffeeWeekArr = [];
+          const workWeekArr = [];
+          snapshot.forEach((doc) => {
+            const now = new Date();
+            const lastMidnight = now.setHours(0, 0, 0, 0) / 1000;
+            const secondsInADay = 86400;
+            const secondsInAWeek = secondsInADay * 7;
+            const lastWeek = lastMidnight - secondsInAWeek;
+            if (
+              doc.data().date_created.seconds > lastMidnight &&
+              doc.data().status === "needs a social break!"
+            ) {
+              socialDayArr.push(doc.data());
+            }
+            if (
+              doc.data().date_created.seconds > lastMidnight &&
+              doc.data().status === "Is taking a coffee break. You should come!"
+            ) {
+              coffeeDayArr.push(doc.data());
+            }
+            if (
+              doc.data().date_created.seconds > lastMidnight &&
+              doc.data().status === "is about to start a deep work session"
+            ) {
+              workDayArr.push(doc.data());
+            }
+            if (
+              doc.data().date_created.seconds > lastWeek &&
+              doc.data().status === "needs a social break!"
+            ) {
+              socialWeekArr.push(doc.data());
+            }
+            if (
+              doc.data().date_created.seconds > lastWeek &&
+              doc.data().status === "Is taking a coffee break. You should come!"
+            ) {
+              coffeeWeekArr.push(doc.data());
+            }
+            if (
+              doc.data().date_created.seconds > lastWeek &&
+              doc.data().status === "is about to start a deep work session"
+            ) {
+              workWeekArr.push(doc.data());
+            }
+          });
+          setSocialDay(socialDayArr.length);
+          setWorkDay(workDayArr.length);
+          setCoffeeDay(coffeeDayArr.length);
+          setSocialWeek(socialWeekArr.length);
+          setWorkWeek(workWeekArr.length);
+          setCoffeeWeek(coffeeWeekArr.length);
+        });
+    }
+  }, [user]);
 
   return (
     <Grid item xs={6} className={classes.rightBar}>
