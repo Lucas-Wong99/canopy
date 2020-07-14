@@ -6,22 +6,22 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   daily: {
     // display: "flex",
-  },
+  }
 }));
 
 function DailyDataVis({ socialDay, workDay, coffeeDay }) {
   const classes = useStyles();
 
   const daily = {
-    labels: ["Self-care", "Heads down work", "Collaboration"],
+    labels: ["Social Breaks", "Heads Down Work", "Coffee Breaks"],
     datasets: [
       {
         label: "Rainfall",
-        backgroundColor: ["#B21F00", "#C9DE00", "#2FDE00"],
-        hoverBackgroundColor: ["#501800", "#4B5000", "#175000"],
-        data: [socialDay, workDay, coffeeDay],
-      },
-    ],
+        backgroundColor: ["#294C60", "#773344", "#FFC857"],
+        hoverBackgroundColor: ["#447c9b", "#a5495f", "#9b7933"],
+        data: [socialDay, workDay, coffeeDay]
+      }
+    ]
   };
 
   return (
@@ -34,12 +34,12 @@ function DailyDataVis({ socialDay, workDay, coffeeDay }) {
           title: {
             display: true,
             text: "Breakdown of your day",
-            fontSize: 10,
+            fontSize: 10
           },
           legend: {
             display: false,
-            position: "right",
-          },
+            position: "right"
+          }
         }}
       />
     </Grid>

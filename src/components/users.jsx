@@ -6,14 +6,14 @@ import { functions } from "../firebase";
 let status_color = "black";
 
 function User({ name, photoURL, current_status, token }) {
-  if (current_status === "`is starting a about to start a deep work session`") {
-    status_color = "pink";
+  if (current_status === "is about to start a deep work session.") {
+    status_color = "#773344";
   } else if (current_status === "needs a social break!") {
-    status_color = "green";
-  } else if (current_status === "Is taking a coffee break. You should come!") {
-    status_color = "blue";
+    status_color = "#294C60";
+  } else if (current_status === "is taking a coffee break. You should come!") {
+    status_color = "#FFC857";
   } else {
-    status_color = "orange";
+    status_color = "#7CA982";
   }
   const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -29,19 +29,19 @@ function User({ name, photoURL, current_status, token }) {
         borderRadius: "50%",
         animation: "$ripple 1.2s infinite ease-in-out",
         border: "1px solid currentColor",
-        content: '""',
-      },
+        content: '""'
+      }
     },
     "@keyframes ripple": {
       "0%": {
         transform: "scale(.8)",
-        opacity: 1,
+        opacity: 1
       },
       "100%": {
         transform: "scale(2.4)",
-        opacity: 0,
-      },
-    },
+        opacity: 0
+      }
+    }
   }))(Badge);
 
   const StyledBadge2 = withStyles((theme) => ({
@@ -52,9 +52,9 @@ function User({ name, photoURL, current_status, token }) {
       "&:hover": {
         cursor: "pointer",
         background: "#7CA982",
-        color: theme.palette.background.paper,
-      },
-    },
+        color: theme.palette.background.paper
+      }
+    }
   }))(Badge);
 
   const useStyles = makeStyles((theme) => ({
@@ -62,13 +62,13 @@ function User({ name, photoURL, current_status, token }) {
       marginLeft: "10px",
       display: "flex",
       "& > *": {
-        margin: theme.spacing(1),
-      },
+        margin: theme.spacing(1)
+      }
     },
     large: {
       width: theme.spacing(15),
-      height: theme.spacing(15),
-    },
+      height: theme.spacing(15)
+    }
   }));
 
   const classes = useStyles();
@@ -76,7 +76,7 @@ function User({ name, photoURL, current_status, token }) {
   const send = (token) => {
     const sendMessage = functions.httpsCallable("sendMessage");
     sendMessage({
-      token,
+      token
     })
       .then((res) => {
         console.log("USERNAME!!!!", res);
@@ -92,7 +92,7 @@ function User({ name, photoURL, current_status, token }) {
         overlap="circle"
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "left"
         }}
         badgeContent="nudge"
         onClick={() => send(token)}
@@ -101,7 +101,7 @@ function User({ name, photoURL, current_status, token }) {
           overlap="circle"
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "right",
+            horizontal: "right"
           }}
           badgeContent=" "
         >

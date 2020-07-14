@@ -48,7 +48,7 @@ function Pomodoro() {
   };
 
   const createNotificationTitle = (status) => {
-    if (status === "is about to start a deep work session") {
+    if (status === "is about to start a deep work session.") {
       return "Break time! Your work session is over";
     } else if (status === "needs a social break!") {
       return "Your social break is over 🙂";
@@ -64,6 +64,9 @@ function Pomodoro() {
       icon: "canopyIcon512.png",
       body: ""
     });
+    notification.onClick = function () {
+      window.open("https://canopy-1bb2b.firebaseapp.com/");
+    };
     console.log(notification);
   };
 
@@ -84,12 +87,12 @@ function Pomodoro() {
       setPlay(false);
       timerNotification(currentStatus);
       //If statement that uses conditions to create the correct message
-      if (currentStatus === "is about to start a deep work session") {
+      if (currentStatus === "is about to start a deep work session.") {
         addStatus("has finished a deep work session.");
       } else if (currentStatus === "needs a social break!") {
         addStatus("has finished a social break.");
       } else if (
-        currentStatus === "Is taking a coffee break. You should come!"
+        currentStatus === "is taking a coffee break. You should come!"
       ) {
         addStatus("has finished a coffee break.");
       }
@@ -129,7 +132,7 @@ function Pomodoro() {
       >
         <Button
           onClick={() => {
-            addStatus("is about to start a deep work session");
+            addStatus("is about to start a deep work session.");
             reset(10);
           }}
         >
