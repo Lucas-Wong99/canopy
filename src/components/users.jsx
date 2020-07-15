@@ -61,6 +61,7 @@ function User({ name, photoURL, current_status, token }) {
     root: {
       marginLeft: "10px",
       display: "flex",
+      zIndex: 2,
       "& > *": {
         margin: theme.spacing(1)
       }

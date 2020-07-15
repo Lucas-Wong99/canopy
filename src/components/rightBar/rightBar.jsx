@@ -85,7 +85,7 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "Is taking a coffee break. You should join!"
+              doc.data().status === "is taking a coffee break. You should join!"
             ) {
               coffeeDayArr.push(doc.data());
             }
@@ -103,7 +103,7 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "Is taking a coffee break. You should join!"
+              doc.data().status === "is taking a coffee break. You should join!"
             ) {
               coffeeWeekArr.push(doc.data());
             }

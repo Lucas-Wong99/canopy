@@ -104,8 +104,8 @@ exports.sendMessage = functions.https.onCall((data, context) => {
   console.log("Token", token);
   var message = {
     notification: {
-      title: "Nudge!!",
-      body: "from:" + context.auth.token.name
+      title: "🦾 You got nudged!",
+      body: "by:" + context.auth.token.name
     },
     token: token
   };

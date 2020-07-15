@@ -1,16 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles((theme) => ({
   canvas: {
     position: "absolute",
-    top: "25%",
+    top: "28%",
     right: "55%",
     zIndex: 0
   }
 }));
-
 
 function Vines({ statusCount }) {
   const classes = useStyles();
@@ -57,7 +55,7 @@ function Vines({ statusCount }) {
       [
         { x: 100, y: 300 },
         { x: 700, y: 300 }
-      ],
+      ]
     ],
     branches: [
       {
@@ -308,21 +306,21 @@ function Vines({ statusCount }) {
     drawLattice();
   }, []);
 
-
   useEffect(() => {
     setState((prev) => ({ ...prev, interations: statusCount }));
-  }, [statusCount])
-
+  }, [statusCount]);
 
   useEffect(() => {
     drawVines();
   }, [state.interations]);
 
   return (
-    
-  <canvas className={classes.canvas} ref={canvasEl} height="600" width="800"/>
-    
-    
+    <canvas
+      className={classes.canvas}
+      ref={canvasEl}
+      height="600"
+      width="800"
+    />
   );
 }
 

@@ -20,7 +20,7 @@ function Avatar_Display({ currentUser }) {
               name: doc.data().name,
               photoURL: doc.data().photoURL,
               current_status: doc.data().current_status,
-              token: doc.data().deviceToken,
+              token: doc.data().deviceToken
             });
           } else {
             userData.push({
@@ -28,7 +28,7 @@ function Avatar_Display({ currentUser }) {
               name: doc.data().name,
               photoURL: doc.data().photoURL,
               current_status: doc.data().current_status,
-              token: doc.data().deviceToken,
+              token: doc.data().deviceToken
             });
           }
         });

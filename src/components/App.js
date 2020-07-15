@@ -6,8 +6,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    background: "linear-gradient(45deg, #7CA982 30%, #0D4439 90%)",
-  },
+    background: "linear-gradient(45deg, #7CA982 30%, #0D4439 90%)"
+  }
 }));
 
 const theme = createMuiTheme({
@@ -16,19 +16,19 @@ const theme = createMuiTheme({
       light: "#acdbb2",
       main: "#7ca982",
       dark: "#4f7a55",
-      contrastText: "#000000",
+      contrastText: "#000000"
     },
     secondary: {
       light: "#4c685f",
       main: "#243e36",
       dark: "#00180f",
-      contrastText: "#ffffff",
-    },
+      contrastText: "#ffffff"
+    }
   },
   typography: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "'Montserrat', sans-serif"
   },
-  spacing: 8,
+  spacing: 8
 
   // breakpoints: {
   //   values: {
@@ -52,7 +52,7 @@ function App() {
       "sendTokenToFirestore"
     );
     sendTokenToFirestore({
-      token,
+      token
     })
       .then((res) => {
         console.log(res);
@@ -80,7 +80,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container className={classes.container} maxWidth={"fill"}>
+      <Container className={classes.container} maxWidth={false}>
         <Dashboard />
       </Container>
     </ThemeProvider>

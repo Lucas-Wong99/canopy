@@ -52,7 +52,7 @@ function Pomodoro({ pomodoro }) {
       return "Break time! Your work session is over";
     } else if (status === "needs a social break!") {
       return "Your social break is over 🙂";
-    } else if (status === "Is taking a coffee break. You should join!") {
+    } else if (status === "is taking a coffee break. You should join!") {
       return "Coffee break is over!";
     }
   };
