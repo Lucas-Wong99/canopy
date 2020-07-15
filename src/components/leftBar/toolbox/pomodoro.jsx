@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& > *": {
       margin: theme.spacing(1),
-      zIndex: 2
-    }
+      zIndex: 2,
+    },
   },
   time: {
     fontSize: "72px",
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "100%",
     textAlign: "center",
-    zIndex: 2
-  }
+    zIndex: 2,
+  },
 }));
 
 function Pomodoro({ pomodoro }) {
@@ -37,7 +37,7 @@ function Pomodoro({ pomodoro }) {
     setCurrentStatus(status);
     const createStatus = functions.httpsCallable("addStatus");
     createStatus({
-      status
+      status,
     })
       .then((res) => {
         console.log("New Status", res);
@@ -62,7 +62,7 @@ function Pomodoro({ pomodoro }) {
     const notificationTitle = createNotificationTitle(status);
     const notification = new Notification(notificationTitle, {
       icon: "canopyIcon512.png",
-      body: ""
+      body: "",
     });
     notification.onClick = function () {
       window.open("https://canopy-1bb2b.firebaseapp.com/");

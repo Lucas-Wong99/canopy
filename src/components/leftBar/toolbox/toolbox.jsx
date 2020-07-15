@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "flex-end",
-    paddingBottom: "20px"
+    paddingBottom: "20px",
   },
   paper: {
     textAlign: "center",
@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   trackers: {
     display: "flex",
     justifyContent: "space-between",
-    width: "50%"
-  }
+    width: "450px",
+  },
 }));
 
 function Toolbox({ checkinData }) {
