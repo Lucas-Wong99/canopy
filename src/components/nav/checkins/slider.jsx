@@ -15,16 +15,18 @@ const DiscreteSlider = function ({ setWellnessScore, time }) {
       <Typography component={"span"} id="discrete-slider-always">
         How would you rate your wellness {time} today?
       </Typography>
-      <Slider
-        defaultValue={8}
-        aria-labelledby="discrete-slider-always"
-        step={1}
-        onChangeCommitted={valuetext}
-        marks={marks}
-        max={10}
-        min={1}
-        valueLabelDisplay="on"
-      />
+      <div className={classes.sliderText}>
+        <Slider
+          defaultValue={8}
+          aria-labelledby="discrete-slider-always"
+          step={1}
+          onChangeCommitted={valuetext}
+          marks={marks}
+          max={10}
+          min={1}
+          valueLabelDisplay="on"
+        />
+      </div>
     </div>
   );
 };

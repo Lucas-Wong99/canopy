@@ -6,14 +6,17 @@ import { useStyles } from "../../../hooks/checkin/dailyCheck-in";
 import DiscreteSlider from "./slider";
 import ToolSelector from "./toolSelector";
 
-export default function SimpleBackdrop() {
+export default function Checkin({ setCheckinData, checkinData }) {
   const classes = useStyles();
   const [wellnessScore, setWellnessScore] = useState(8);
-  const [toolSelector, setToolSelector] = useState({
-    pomodoro: true,
-    water: false,
-    stretch: false
-  });
+
+  const { pomodoro, water, stretch } = checkinData;
+
+  // const [toolSelector, setToolSelector] = useState({
+  //   pomodoro: true,
+  //   water: false,
+  //   stretch: false
+  // });
   const [open, setOpen] = useState(false);
   // const handleClose = () => {
   //   setOpen(false);
@@ -56,8 +59,8 @@ export default function SimpleBackdrop() {
           <DiscreteSlider setWellnessScore={setWellnessScore} />
 
           <ToolSelector
-            toolSelector={toolSelector}
-            setToolSelector={setToolSelector}
+            setCheckinData={setCheckinData}
+            checkinData={checkinData}
           />
 
           <Button
@@ -66,12 +69,7 @@ export default function SimpleBackdrop() {
             color="primary"
             onClick={() => {
               handleToggle();
-              createCheck(
-                wellnessScore,
-                toolSelector.pomodoro,
-                toolSelector.water,
-                toolSelector.stretch
-              );
+              createCheck(wellnessScore, pomodoro, water, stretch);
             }}
           >
             Submit

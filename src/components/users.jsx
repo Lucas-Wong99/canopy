@@ -10,7 +10,7 @@ function User({ name, photoURL, current_status, token }) {
     status_color = "#773344";
   } else if (current_status === "needs a social break!") {
     status_color = "#294C60";
-  } else if (current_status === "is taking a coffee break. You should come!") {
+  } else if (current_status === "is taking a coffee break. You should join!") {
     status_color = "#FFC857";
   } else {
     status_color = "#7CA982";

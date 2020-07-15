@@ -17,17 +17,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Need to circle back and extract state up to the parent level (maybe all the way up to the top so it can be passed back down to conditionally render the tools picked)
-export default function ToolSelector({ toolSelector, setToolSelector }) {
+export default function ToolSelector({ checkinData, setCheckinData }) {
   const classes = useStyles();
 
   const handleChange = (event) => {
-    setToolSelector({
-      ...toolSelector,
+    setCheckinData({
+      ...checkinData,
       [event.target.name]: event.target.checked
     });
   };
 
-  const { pomodoro, water, stretch } = toolSelector;
+  const { pomodoro, water, stretch } = checkinData;
   // const error = [pomodoro, water, stretch].filter((v) => v).length !== 2;
 
   return (
@@ -61,7 +61,7 @@ export default function ToolSelector({ toolSelector, setToolSelector }) {
                 name="stretch"
               />
             }
-            label="Stretch Reminders"
+            label="Stretch Tracker"
           />
         </FormGroup>
         <FormHelperText>Use as many or as few as you need.</FormHelperText>

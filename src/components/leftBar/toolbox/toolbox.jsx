@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-end",
     paddingBottom: "20px"
-    
   },
   paper: {
     textAlign: "center",
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     zIndex: 2,
     display: "flex",
-    flexDirection: 'column',
+    flexDirection: "column",
     justifyContent: "space-between"
   },
   trackers: {
@@ -32,16 +31,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-function Toolbox() {
+function Toolbox({ checkinData }) {
   const classes = useStyles();
-
+  const { pomodoro, water, stretch } = checkinData;
   return (
     <Grid className={classes.root}>
-      <Pomodoro />
+      <Pomodoro pomodoro={pomodoro} />
       <span className={classes.trackers}>
-        <WaterButton />
-        <StretchButton  />
+        {water && <WaterButton />}
+        {stretch && <StretchButton />}
       </span>
     </Grid>
   );

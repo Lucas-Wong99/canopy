@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   avatars: {
     color: theme.palette.text.secondary,
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     color: "black",
     paddingLeft: "10px",
-    overflow: "auto",
+    overflow: "auto"
   },
   pomodoro: {
     textAlign: "center",
@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-  },
+    justifyContent: "space-between"
+  }
 }));
 
-export default function LeftBar({ statusCount, user }) {
+export default function LeftBar({ statusCount, user, checkinData }) {
   const classes = useStyles();
 
   return (
@@ -43,7 +43,7 @@ export default function LeftBar({ statusCount, user }) {
       <Paper className={classes.pomodoro} elevation={5}>
         <Vines className={classes.vines} statusCount={statusCount} />
 
-        <Toolbox />
+        <Toolbox checkinData={checkinData} />
       </Paper>
     </Grid>
   );

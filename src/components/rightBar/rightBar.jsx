@@ -8,17 +8,17 @@ import VerticalTabs from "./dataTabs";
 const useStyles = makeStyles((theme) => ({
   dataVis: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   waterVis: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   rightPaper: {
     height: "49%",
-    font: theme.typography.fontFamily,
+    font: theme.typography.fontFamily
     // padding: "10px",
   },
   rightBar: {
@@ -27,20 +27,20 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     font: theme.typography.fontFamily,
-    width: "854px",
+    width: "854px"
   },
   status: {
     overflow: "auto",
-    height: "80%",
+    height: "80%"
   },
   title: {
     marginLeft: "10px",
     marginBottom: "0px",
-    marginTop: "10px",
+    marginTop: "10px"
   },
   vertTab: {
-    borderRadius: "25px",
-  },
+    borderRadius: "25px"
+  }
 }));
 
 export default function RightBar({ setStatusCount, user }) {
@@ -85,7 +85,7 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "Is taking a coffee break. You should come!"
+              doc.data().status === "Is taking a coffee break. You should join!"
             ) {
               coffeeDayArr.push(doc.data());
             }
@@ -103,7 +103,7 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "Is taking a coffee break. You should come!"
+              doc.data().status === "Is taking a coffee break. You should join!"
             ) {
               coffeeWeekArr.push(doc.data());
             }
