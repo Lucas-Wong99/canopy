@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import googleSignin from "./google_btn";
 import Checkin from "./checkins/morningCheckin";
 import Checkout from "./checkins/checkout";
+import LandingPage from "./landingPage";
 
 const useStyles = makeStyles((theme) => ({
   brandBar: {
@@ -43,6 +44,7 @@ export default function Nav({ user }) {
           {/* <button onClick={() => googleSignin()}>Google Signin</button> */}
         </span>
         <span className={classes.buttons}>
+          <LandingPage />
           <Checkin />
           <Checkout />
         </span>
