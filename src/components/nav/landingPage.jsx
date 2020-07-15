@@ -3,6 +3,7 @@ import { Backdrop, Button, Container, Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import googleSignin from "./google_btn";
 // import Image from "../../canopyPhoto.jpg";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +52,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
+  cancel: {
+    position: "absolute",
+    top: "50px",
+    right: "200px",
+    cursor: "pointer",
+    // display: "flex",
+    // alignItem: "start",
+  },
 }));
 
 export default function LandingPage() {
@@ -75,8 +84,11 @@ export default function LandingPage() {
           <source src="/video.mp4" type="video/mp4" />
           Your Browser does not support this video tag
         </video>
+        <div className={classes.cancel}>
+          <CancelIcon onClick={() => handleClose()}></CancelIcon>
+        </div>
         <div className={classes.welcome}>
-          <h1>CANOPY </h1>
+          <h1>CANOPY</h1>
           working together, apart
           {/* <img height="75px" src="/CanopyLogo.png" alt="Canopy Logo" /> */}
           <Button
