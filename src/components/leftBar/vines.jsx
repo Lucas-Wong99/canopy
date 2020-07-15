@@ -31,11 +31,11 @@ function Vines({ statusCount }) {
       ],
       [
         { x: 400, y: 100 },
-        { x: 400, y: 400 }
+        { x: 400, y: 300 }
       ],
       [
         { x: 500, y: 100 },
-        { x: 500, y: 400 }
+        { x: 500, y: 300 }
       ],
       [
         { x: 600, y: 100 },
@@ -58,18 +58,14 @@ function Vines({ statusCount }) {
         { x: 100, y: 300 },
         { x: 700, y: 300 }
       ],
-      [
-        { x: 100, y: 400 },
-        { x: 700, y: 400 }
-      ],
     ],
     branches: [
       {
         points: [
-          { x: 400, y: 400 },
-          { x: 400, y: 400 },
-          { x: 400, y: 400 },
-          { x: 400, y: 400 }
+          { x: 400, y: 200 },
+          { x: 400, y: 200 },
+          { x: 400, y: 200 },
+          { x: 400, y: 200 }
         ],
         angle: 0,
         distanceToLattice: 1000
@@ -296,8 +292,8 @@ function Vines({ statusCount }) {
 
     // Draw lattice
     context.lineWidth = 0.5;
-    context.strokeStyle = "rgb(213, 0, 0)";
-    //context.strokeStyle = "rgb(250, 250, 250)";
+    //context.strokeStyle = "rgb(213, 0, 0)";
+    context.strokeStyle = "rgb(250, 250, 250)";
 
     state.lattice.forEach((lattice) => {
       context.beginPath();
