@@ -85,13 +85,13 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "Is taking a coffee break. You should come!"
+              doc.data().status === "is taking a coffee break. You should come!"
             ) {
               coffeeDayArr.push(doc.data());
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "is about to start a deep work session"
+              doc.data().status === "is about to start a deep work session."
             ) {
               workDayArr.push(doc.data());
             }
@@ -103,13 +103,13 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "Is taking a coffee break. You should come!"
+              doc.data().status === "is taking a coffee break. You should join!"
             ) {
               coffeeWeekArr.push(doc.data());
             }
             if (
               doc.data().date_created.seconds > lastWeek &&
-              doc.data().status === "is about to start a deep work session"
+              doc.data().status === "is about to start a deep work session."
             ) {
               workWeekArr.push(doc.data());
             }

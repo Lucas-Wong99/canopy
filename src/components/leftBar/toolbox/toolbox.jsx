@@ -13,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "flex-end",
-    paddingBottom: "20px"
-    
+    paddingBottom: "20px",
   },
   paper: {
     textAlign: "center",
@@ -22,16 +21,15 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     zIndex: 2,
     display: "flex",
-    flexDirection: 'column',
-    justifyContent: "space-between"
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   trackers: {
     display: "flex",
     justifyContent: "space-between",
-    width: "50%"
-  }
+    width: "450px",
+  },
 }));
-
 
 function Toolbox() {
   const classes = useStyles();
@@ -41,7 +39,7 @@ function Toolbox() {
       <Pomodoro />
       <span className={classes.trackers}>
         <WaterButton />
-        <StretchButton  />
+        <StretchButton />
       </span>
     </Grid>
   );
