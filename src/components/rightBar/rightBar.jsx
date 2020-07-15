@@ -85,7 +85,7 @@ export default function RightBar({ setStatusCount, user }) {
             }
             if (
               doc.data().date_created.seconds > lastMidnight &&
-              doc.data().status === "is taking a coffee break. You should come!"
+              doc.data().status === "is taking a coffee break. You should join!"
             ) {
               coffeeDayArr.push(doc.data());
             }

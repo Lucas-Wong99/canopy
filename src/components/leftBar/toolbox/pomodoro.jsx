@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Pomodoro() {
+function Pomodoro({ pomodoro }) {
   const classes = useStyles();
   const [currentStatus, setCurrentStatus] = useState("");
   // Stateful Timers Client Side
@@ -52,7 +52,7 @@ function Pomodoro() {
       return "Break time! Your work session is over";
     } else if (status === "needs a social break!") {
       return "Your social break is over 🙂";
-    } else if (status === "Is taking a coffee break. You should come!") {
+    } else if (status === "Is taking a coffee break. You should join!") {
       return "Coffee break is over!";
     }
   };
@@ -92,7 +92,7 @@ function Pomodoro() {
       } else if (currentStatus === "needs a social break!") {
         addStatus("has finished a social break.");
       } else if (
-        currentStatus === "is taking a coffee break. You should come!"
+        currentStatus === "is taking a coffee break. You should join!"
       ) {
         addStatus("has finished a coffee break.");
       }
@@ -121,10 +121,13 @@ function Pomodoro() {
 
   return (
     <div className={classes.root}>
-      <div className="container display timer">
-        <h1 className={classes.time}> {format(time)} </h1>
-        <p>Let's track your Canopy time</p>
-      </div>
+      {pomodoro && (
+        <div className="container display timer">
+          <h1 className={classes.time}> {format(time)} </h1>
+          <p>Let's track your Canopy time</p>
+        </div>
+      )}
+
       <ButtonGroup
         variant="text"
         color="primary"
@@ -150,7 +153,7 @@ function Pomodoro() {
 
         <Button
           onClick={() => {
-            addStatus("is taking a coffee break. You should come!");
+            addStatus("is taking a coffee break. You should join!");
             reset(10);
           }}
         >
@@ -159,9 +162,11 @@ function Pomodoro() {
         </Button>
       </ButtonGroup>
 
-      <Button variant="contained" color="primary" onClick={toggle}>
-        {play ? "Pause" : "Start"}
-      </Button>
+      {pomodoro && (
+        <Button variant="contained" color="primary" onClick={toggle}>
+          {play ? "Pause" : "Start"}
+        </Button>
+      )}
     </div>
   );
 }

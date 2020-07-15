@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3)
   },
 
+  sliderText: {
+    marginTop: "35px"
+  },
+
   button: {
     height: "20px",
     width: "100px"

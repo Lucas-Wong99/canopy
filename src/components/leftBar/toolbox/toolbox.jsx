@@ -31,15 +31,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Toolbox() {
+function Toolbox({ checkinData }) {
   const classes = useStyles();
-
+  const { pomodoro, water, stretch } = checkinData;
   return (
     <Grid className={classes.root}>
-      <Pomodoro />
+      <Pomodoro pomodoro={pomodoro} />
       <span className={classes.trackers}>
-        <WaterButton />
-        <StretchButton />
+        {water && <WaterButton />}
+        {stretch && <StretchButton />}
       </span>
     </Grid>
   );

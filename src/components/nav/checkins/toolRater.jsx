@@ -69,7 +69,7 @@ export default function ToolSelector({ toolRater, setToolRater }) {
                 name="stretch"
               />
             }
-            label="Stretch Reminders"
+            label="Stretch Tracker"
           />
         </FormGroup>
         <FormHelperText>

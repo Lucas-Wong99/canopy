@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     background: "linear-gradient(45deg, #7CA982 30%, #0D4439 90%)",
     padding: "10px",
-    height: "100vh",
+    height: "100vh"
   },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
-    height: "100%",
-  },
+    height: "100%"
+  }
 }));
 
 function Dashboard() {
@@ -24,6 +24,11 @@ function Dashboard() {
 
   const [statusCount, setStatusCount] = useState(0);
   const [user, setUser] = useState("");
+  const [checkinData, setCheckinData] = useState({
+    pomodoro: false,
+    water: false,
+    stretch: false
+  });
 
   const accessId = () => {
     const getUserId = functions.httpsCallable("getUserId");
@@ -45,8 +50,16 @@ function Dashboard() {
       <Grid container spacing={2} className={classes.root}>
         {" "}
         {/*this holds all the page, and is the gradient background, holds the grid items*/}
-        <Nav user={user} />
-        <LeftBar statusCount={statusCount} user={user} />
+        <Nav
+          user={user}
+          setCheckinData={setCheckinData}
+          checkinData={checkinData}
+        />
+        <LeftBar
+          statusCount={statusCount}
+          user={user}
+          checkinData={checkinData}
+        />
         <RightBar setStatusCount={setStatusCount} user={user} />
       </Grid>
     </div>
