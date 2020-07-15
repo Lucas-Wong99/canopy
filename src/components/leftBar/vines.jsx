@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   canvas: {
     position: "absolute",
-    top: "15%",
+    top: "25%",
     right: "55%",
     zIndex: 0
   }

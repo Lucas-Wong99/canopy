@@ -7,12 +7,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    zIndex: 2,
-    height: "45%",
+    height: "100%",
     display: "flex",
-    flexDirection: "column",
+    zIndex: 2,
     alignItems: "center",
-    paddingBottom: "50px"
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    paddingBottom: "20px"
     
   },
   paper: {

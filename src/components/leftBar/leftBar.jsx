@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     height: "75%",
     zIndex: 2,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 }));
 
@@ -40,7 +43,7 @@ export default function LeftBar({ statusCount, user }) {
       <Paper className={classes.pomodoro} elevation={5}>
         <Vines className={classes.vines} statusCount={statusCount} />
 
-        <Toolbox className={classes.avatarDisplay} />
+        <Toolbox />
       </Paper>
     </Grid>
   );
