@@ -42,10 +42,10 @@ npm firebase init
 Follow the Firebase init console instructions.
 
 On your Firebase project dashboard, head into *Project Settings*, located under the gear icon beside the *Project Overview* link on the left nav bar.
-![get project settings]()
+![get project settings](https://github.com/Lucas-Wong99/canopy/blob/master/docs/getProjectInfo.png?raw=true)
 
 At the bottom of the project settings page, you will find the Firebase SDK config details for your project.
-![get project config]() 
+![get project config](https://github.com/Lucas-Wong99/canopy/blob/master/docs/getConfig.png?raw=true) 
 
 Copy that info into two places in the Canopy codebase:
 
