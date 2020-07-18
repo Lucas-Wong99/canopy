@@ -1,68 +1,88 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to the Canopy
 
-## Available Scripts
+Canopy is a workflow enhancement tool for remote teams to stay connected and build a culture of healthy work habits. 
 
-In the project directory, you can run:
+## Tech Stack
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app), Canopy is a cloud native, serverless, progressive web app built on the Google Firebase platform.
+
+
+## Images
+
+![landing]()
+
+![full view]()
+
+
+## Getting started with Canopy
+
+Canopy is a cloud-native app, and requires integration with Google Cloud Firebase. To get going, head over [to the console](https://console.firebase.google.com/) and create a new project. Google has excellent [documentation to get you started](https://firebase.google.com/docs/web/setup). 
+
+You will need to select four addons when you create your project:
+1. Google Authentication
+2. Cloud Firestore
+3. Cloud Messaging
+4. Cloud Functions
+
+After creating your own firebase project, **you will need to:**
+
+Clone Canopy to your machine.
+
+In the main directory of the project:
+
+```js
+npm install firebase
+
+npm install
+
+npm firebase init
+```
+
+Follow the Firebase init console instructions.
+
+On your Firebase project dashboard, head into *Project Settings*, located under the gear icon beside the *Project Overview* link on the left nav bar.
+![get project settings]()
+
+At the bottom of the project settings page, you will find the Firebase SDK config details for your project.
+![get project config]() 
+
+Copy that info into two places in the Canopy codebase:
+
+1. firebase-messaging-sw.js in the Public folder
+2. firebase.js in the src folder
+
+
+After your own config is present, you can deploy the cloud functions to your firebase project with:
+```
+firebase deploy --only functions
+```
+
 
 ### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The progressive web application features will require a production build, which you can create and access with:
 
-### `npm test`
+```
+npm run build
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm run start-sw
+```
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Project Dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Firebase
+- React
+- Material-UI
+- Moment
+- Polished
+- Chartjs
+- React Chartjs
 
-### `npm run eject`
+### Dev Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- http-server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
