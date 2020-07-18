@@ -2,15 +2,17 @@
 
 Canopy is a workflow enhancement tool for remote teams to stay connected and build a culture of healthy work habits. 
 
+This project built with love by [Em Pascas](https://github.com/Avec-em), [Lucas Wong](https://github.com/Lucas-Wong99), and [Daniel Huss](https://github.com/Daniel-N-Huss)
+
 ## Tech Stack
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app), Canopy is a cloud native, serverless, progressive web app built on the Google Firebase platform.
 
 
 ## Images
 
-![landing]()
+![landing](https://github.com/Lucas-Wong99/canopy/blob/master/docs/landing.png?raw=true)
 
-![full view]()
+![full view](https://github.com/Lucas-Wong99/canopy/blob/master/docs/Full%20View.png?raw=true)
 
 
 ## Getting started with Canopy
@@ -86,3 +88,7 @@ npm run start-sw
 
 - http-server
 
+
+
+## More views:
+More project photos can be found [here](https://github.com/Lucas-Wong99/canopy/tree/master/docs).
